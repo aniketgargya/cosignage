@@ -1,0 +1,36 @@
+version: '3.8'
+
+services:
+  proxy:
+    build: ./proxy
+    environment:
+      - DOMAIN=omnistacks.com
+      - EMAIL=gargya.aniket@gmail.com
+    volumes:
+      - type: volume
+        source: ssl-certificates
+        target: /etc/letsencrypt
+    depends_on:
+      # - frontend
+      - backend
+    ports:
+      - 80:80
+      - 443:443
+#   frontend:
+#     build: ./frontend
+#     depends_on:
+#       - backend
+  backend:
+    build: ./backend
+    depends_on:
+      - database
+  database:
+    image: mongo
+    volumes:
+      - type: volume
+        source: mongodb-data
+        target: /data/db
+
+volumes:
+  mongodb-data:
+  ssl-certificates:
