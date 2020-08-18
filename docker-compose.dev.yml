@@ -1,21 +1,8 @@
 version: '3.8'
 
 services:
-  certification:
-    build: ./certification
-    environment:
-      - DOMAIN=encrypt3.omnistacks.com
-    volumes:
-      - type: volume 
-        source: ssl-certificates
-        target: /etc/letsencrypt
-      - type: volume
-        source: certbot-challenges
-        target: /var/www/certbot
   proxy:
     build: ./proxy
-    environment:
-      - DOMAIN=encrypt3.omnistacks.com
     depends_on:
       # - frontend
       - backend
