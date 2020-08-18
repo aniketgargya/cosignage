@@ -1,25 +1,34 @@
 version: '3.8'
 
 services:
-  proxy:
-    build: ./proxy
-    environment:
-      - DOMAIN=omnistacks.com
-      - EMAIL=gargya.aniket@gmail.com
+  certification:
+    build: ./certification
     volumes:
-      - type: volume
+      - type: volume 
         source: ssl-certificates
         target: /etc/letsencrypt
+      - type: volume
+        source: certbot-challenges
+        target: /var/www/certbot
+  proxy:
+    build: ./proxy
     depends_on:
       # - frontend
       - backend
     ports:
       - 80:80
       - 443:443
-#   frontend:
-#     build: ./frontend
-#     depends_on:
-#       - backend
+    volumes:
+      - type: volume
+        source: ssl-certificates
+        target: /etc/letsencrypt
+      - type: volume
+        source: certbot-challenges
+        target: /var/www/certbot
+  # frontend:
+  #   build: ./frontend
+  #   depends_on:
+  #     - backend
   backend:
     build: ./backend
     depends_on:
@@ -34,3 +43,4 @@ services:
 volumes:
   mongodb-data:
   ssl-certificates:
+  certbot-challenges:
