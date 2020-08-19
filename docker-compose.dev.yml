@@ -2,30 +2,37 @@ version: '3.8'
 
 services:
   proxy:
-    build: ./proxy
+    build:
+      context: ./proxy
+      dockerfile: Dockerfile.dev
     env_file:
       - ./.env.domain
     depends_on:
-      # - frontend
+      - frontend
       - backend
     ports:
       - 80:80
       - 443:443
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile.dev
+    depends_on:
+      - backend
     volumes:
-      - type: volume
-        source: ssl-certificates
-        target: /etc/letsencrypt
-      - type: volume
-        source: certbot-challenges
-        target: /var/www/certbot
-  # frontend:
-  #   build: ./frontend
-  #   depends_on:
-  #     - backend
+      - type: bind
+        source: ./frontend/src
+        target: /app/src
   backend:
-    build: ./backend
+    build:
+      context: ./backend
+      dockerfile: Dockerfile.dev
     depends_on:
       - database
+    volumes:
+      - type: bind
+        source: ./backend/src
+        target: /app/src
   database:
     image: mongo
     volumes:

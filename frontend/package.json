@@ -9,5 +9,10 @@
     "start": "next start src"
   },
   "author": "Aniket Gargya <gargya.aniket@gmail.com>",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "next": "^9.5.2",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1"
+  }
 }

@@ -4,11 +4,15 @@
   "description": "",
   "main": "src/app.js",
   "scripts": {
+    "dev": "nodemon src/app.js",
     "start": "node src/app.js"
   },
   "author": "Aniket Gargya",
   "license": "ISC",
   "dependencies": {
     "express": "^4.17.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.4"
   }
 }
