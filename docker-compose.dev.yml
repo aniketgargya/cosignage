@@ -3,6 +3,8 @@ version: '3.8'
 services:
   proxy:
     build: ./proxy
+    env_file:
+      - ./.env.domain
     depends_on:
       # - frontend
       - backend

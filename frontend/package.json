@@ -1,0 +1,13 @@
+{
+  "name": "frontend",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "next src",
+    "build": "next build src",
+    "start": "next start src"
+  },
+  "author": "Aniket Gargya <gargya.aniket@gmail.com>",
+  "license": "ISC"
+}
