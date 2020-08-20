@@ -39,6 +39,8 @@ services:
       - type: volume
         source: mongodb-data
         target: /data/db
+    ports:
+      - 27017:27017
 
 volumes:
   mongodb-data:
