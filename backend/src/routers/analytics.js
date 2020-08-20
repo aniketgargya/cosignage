@@ -15,7 +15,8 @@ router.post("/visit", async (req, res) => {
         });
 
         res.sendStatus(200);
-    } catch {
+    } catch (error) {
+        console.log(error);
         res.sendStatus(500);
     }
 });
@@ -25,15 +26,19 @@ router.post("/cart", async (req, res) => {
         const { ipInfo, body } = req;
         const { userId, cart } = body;
 
-        await db.carts.updateOne({ userId }, {
-            userId,
-            cart,
-            ipInfo,
-            time: Date(Date.now())
-        }, { upsert: true });
+        if (userId) {
+            await db.carts.updateOne({ userId }, {
+                $set: {
+                    cart,
+                    ipInfo,
+                    time: Date(Date.now())
+                }
+            }, { upsert: true });
+        }
 
         res.sendStatus(200);
-    } catch {
+    } catch (error) {
+        console.log(error);
         res.sendStatus(500);
     }
 });

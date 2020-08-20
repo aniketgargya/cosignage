@@ -1,6 +1,7 @@
 import { createContext, useContext, useEffect, useState, useCallback } from "react";
+import { throttle } from "lodash";
+import axios from "axios";
 import { useUser } from ".";
-import { debounce } from "lodash";
 
 const CartContext = createContext({
     cart: {},
@@ -11,19 +12,29 @@ const CartProvider = ({ children }) => {
     const { userId } = useUser();
     const [cart, setCart] = useState({});
 
-    const logCart = debounce(useCallback((debouncedUserId, debouncedCart) => {
+    useEffect(() => {
+        const newCart = JSON.parse(localStorage.getItem("cart"));
+        if (newCart) setCart(newCart);
+    }, []);
+
+    const logCart = useCallback(throttle(async (debouncedUserId, debouncedCart) => {
+        console.log(debouncedCart)
         await axios({
-            url: "/api/analytics/visit",
+            url: "/api/analytics/cart",
             method: "POST",
             data: {
                 userId: debouncedUserId,
                 cart: debouncedCart
             }
         });
-    }, []));
+    }, 5000), []);
 
     useEffect(() => {
-        logCart(userId, debouncedCart);
+        logCart(userId, cart);
+    }, [cart]);
+
+    useEffect(() => {
+        localStorage.setItem("cart", JSON.stringify(cart));
     }, [cart]);
 
     return (

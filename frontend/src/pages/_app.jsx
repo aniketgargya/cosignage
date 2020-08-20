@@ -1,11 +1,13 @@
-import { UserProvider } from "../contexts";
+import { UserProvider, CartProvider } from "../contexts";
 import { VisitLogger } from "../components";
 
 const App = ({ Component, pageProps }) => {
     return (
         <UserProvider>
             <VisitLogger>
-                <Component {...pageProps} />
+                <CartProvider>
+                    <Component {...pageProps} />
+                </CartProvider>
             </VisitLogger>
         </UserProvider>
     );

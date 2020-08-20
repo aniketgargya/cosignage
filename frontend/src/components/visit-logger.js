@@ -20,6 +20,7 @@ const VisitLogger = ({ children }) => {
     };
 
     useEffect(() => {
+        console.log(userId);
         logVisit();
     }, [userId]);
 

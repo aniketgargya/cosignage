@@ -12,7 +12,7 @@ app.use(expressIp().getIpInfoMiddleware);
 app.use("/analytics", analyticsRouter);
 
 const main = async () => {
-	await db.connect("mongodb://database:27017/", "cosignage", ["visits"], {
+	await db.connect("mongodb://database:27017/", "cosignage", ["visits", "carts"], {
 		useUnifiedTopology: true,
 		useNewUrlParser: true,
 		poolSize: 50
