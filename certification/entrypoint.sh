@@ -13,7 +13,10 @@ then
     mkdir -p /etc/letsencrypt/certificates/c
 
     cp -r /etc/letsencrypt/live/"$DOMAIN"/* /etc/letsencrypt/certificates/c
-    touch /etc/letsencrypt/certificates/c/certbot.txt
+    if [ -d "/etc/letsencrypt/live/$DOMAIN" ];
+    then
+        touch /etc/letsencrypt/certificates/c/certbot.txt
+    fi
 fi
 
 while true; do

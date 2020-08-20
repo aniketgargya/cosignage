@@ -12,7 +12,8 @@
   "dependencies": {
     "express": "^4.17.1",
     "express-ip": "^1.0.4",
-    "mongodb": "^3.6.0"
+    "mongodb": "^3.6.0",
+    "runtypes": "^5.0.1"
   },
   "devDependencies": {
     "nodemon": "^2.0.4"

@@ -5,14 +5,15 @@ const { analyticsRouter } = require("./routers");
 
 const app = express();
 
-app.set("trust proxy", "loopback");
+app.set("trust proxy", true);
 app.use(express.json());
 app.use(expressIp().getIpInfoMiddleware);
 
-app.use("/analytics", analyticsRouter);
+app.get("/", (req, res) => { res.sendStatus(200); });
+app.use("/a", analyticsRouter);
 
-const main = async () => {
-	await db.connect("mongodb://database:27017/", "cosignage", ["visits", "carts"], {
+const main = () => {
+	db.connect("mongodb://database:27017/", "cosignage", ["visits", "carts"], {
 		useUnifiedTopology: true,
 		useNewUrlParser: true,
 		poolSize: 50

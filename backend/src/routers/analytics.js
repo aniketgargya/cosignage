@@ -3,7 +3,7 @@ const db = require("../db");
 
 const router = express.Router();
 
-router.post("/visit", async (req, res) => {
+router.get("/visit", async (req, res) => {
     try {
         const { ipInfo, body } = req;
         const { userId } = body;
@@ -21,7 +21,7 @@ router.post("/visit", async (req, res) => {
     }
 });
 
-router.post("/cart", async (req, res) => {
+router.get("/cart", async (req, res) => {
     try {
         const { ipInfo, body } = req;
         const { userId, cart } = body;

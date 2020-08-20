@@ -10,8 +10,8 @@ const VisitLogger = ({ children }) => {
 
         try {
             await axios({
-                url: "/api/analytics/visit",
-                method: "POST",
+                url: "/api/a/visit",
+                method: "GET",
                 data: {
                     userId
                 }
