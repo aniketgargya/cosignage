@@ -18,10 +18,9 @@ const CartProvider = ({ children }) => {
     }, []);
 
     const logCart = useCallback(throttle(async (debouncedUserId, debouncedCart) => {
-        console.log(debouncedCart)
         await axios({
             url: "/api/a/cart",
-            method: "GET",
+            method: "POST",
             data: {
                 userId: debouncedUserId,
                 cart: debouncedCart
