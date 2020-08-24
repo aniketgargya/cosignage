@@ -1,32 +1,39 @@
 const express = require("express");
 const db = require("../db");
+const { UserId, Cart } = require("../types");
 
 const router = express.Router();
 
-router.get("/visit", async (req, res) => {
-    try {
-        const { ipInfo, body } = req;
-        const { userId } = body;
+router.post("/visit", async (req, res) => {
+    const { ipInfo, body } = req;
+    const { userId } = body;
 
-        await db.visits.insertOne({
-            userId,
-            ipInfo,
-            time: Date(Date.now())
-        });
+    if (UserId.guard(userId)) {
 
-        res.sendStatus(200);
-    } catch (error) {
-        console.log(error);
-        res.sendStatus(500);
+        try {
+            await db.visits.insertOne({
+                userId,
+                ipInfo,
+                time: Date(Date.now())
+            });
+
+            res.sendStatus(200);
+        } catch (e) {
+            res.sendStatus(500);
+        }
+
+    } else {
+        res.sendStatus(400);
     }
 });
 
-router.get("/cart", async (req, res) => {
-    try {
-        const { ipInfo, body } = req;
-        const { userId, cart } = body;
+router.post("/cart", async (req, res) => {
+    const { ipInfo, body } = req;
+    const { userId, cart } = body;
 
-        if (userId) {
+    if (UserId.check(userId) && Cart.check(cart)) {
+
+        try {
             await db.carts.updateOne({ userId }, {
                 $set: {
                     cart,
@@ -34,12 +41,14 @@ router.get("/cart", async (req, res) => {
                     time: Date(Date.now())
                 }
             }, { upsert: true });
+
+            res.sendStatus(200);
+        } catch {
+            res.sendStatus(500);
         }
 
-        res.sendStatus(200);
-    } catch (error) {
-        console.log(error);
-        res.sendStatus(500);
+    } else {
+        res.sendStatus(400);
     }
 });
 
