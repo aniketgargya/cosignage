@@ -3,21 +3,30 @@ const { version, validate } = require("uuid");
 
 const UserId = String.withConstraint(s => validate(s) && version(s) === 1);
 
-const NonNegativeNumber = Number.withConstraint(n => n >= 0);
+const PositiveNumber = Number.withConstraint(n => n > 0);
 
-const cartItems = ["maskRequired", "curbsidePickup"];
+const cartData = {
+    "maskRequired": {
+        name: "Mask Required",
+        imageUrl: undefined,
+        price: 100
+    },
+    "curbsidePickup": {
+        name: "Curbside Pickup",
+        imageUrl: undefined,
+        price: 150
+    }
+};
 
-const Cart = Partial(cartItems.reduce((accumulator, currentValue) => ({
+const Cart = Partial(Object.keys(cartData).reduce((accumulator, currentValue) => ({
     ...accumulator,
-    [currentValue]: NonNegativeNumber
+    [currentValue]: PositiveNumber
 }), {})).withConstraint(r => {
     if (r && Record({}).guard(r)) {
-        return Object.keys(r).every(cartItem => cartItems.includes(cartItem));
+        return Object.keys(r).every(cartItem => Object.keys(cartData).includes(cartItem));
     } else {
         return false;
     }
 });
 
-Cart.check({});
-
-module.exports = { UserId, Cart };
+module.exports = { UserId, Cart, cartData };

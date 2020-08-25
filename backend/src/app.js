@@ -1,7 +1,7 @@
 const express = require("express");
 const expressIp = require("express-ip");
 const db = require("./db");
-const { analyticsRouter } = require("./routers");
+const { analyticsRouter, paymentRouter } = require("./routers");
 const { v4 } = require("uuid");
 const createError = require("http-errors");
 

@@ -5,7 +5,7 @@ import { HamburgerSpin } from "react-animated-burgers";
 const NavBar = () => {
     // const cart = useCart();
     const [sidebarOpen, setSidebarOpen] = useState(false);
-    const links = useRef(null);
+    const links = useRef();
 
     useEffect(() => {
         if (sidebarOpen) links.current?.classList.add("sidebar-open");

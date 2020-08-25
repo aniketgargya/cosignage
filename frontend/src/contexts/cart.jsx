@@ -2,7 +2,7 @@ import { createContext, useContext, useEffect, useState, useCallback } from "rea
 import { throttle } from "lodash";
 import axios from "axios";
 import { useUser } from ".";
-import { Cart } from "../types";
+import { UserId, Cart } from "../types";
 
 const CartContext = createContext({
     cart: {},
@@ -24,14 +24,16 @@ const CartProvider = ({ children }) => {
     }, []);
 
     const logCart = useCallback(throttle(async (debouncedUserId, debouncedCart) => {
-        await axios({
-            url: "/api/a/cart",
-            method: "POST",
-            data: {
-                userId: debouncedUserId,
-                cart: debouncedCart
-            }
-        });
+        if (UserId.guard(debouncedUserId) && Cart.guard(debouncedCart)) {
+            await axios({
+                url: "/api/a/cart",
+                method: "POST",
+                data: {
+                    userId: debouncedUserId,
+                    cart: debouncedCart
+                }
+            });
+        }
     }, 5000), []);
 
     useEffect(() => {
