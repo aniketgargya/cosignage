@@ -1,4 +1,5 @@
 const express = require("express");
+const asyncHandler = require("express-async-handler");
 const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
 const db = require("../db");
 const { Cart, cartData } = require("../types");
@@ -6,7 +7,7 @@ const createError = require("http-errors");
 
 const router = express.Router();
 
-router.post("/checkout-session", async (req, res) => {
+router.post("/checkout-session", asyncHandler(async (req, res) => {
     const { cart } = req.body;
 
     if (Cart.guard(cart)) {
@@ -34,6 +35,6 @@ router.post("/checkout-session", async (req, res) => {
     } else {
         throw new createError(400);
     }
-});
+}));
 
 module.exports = { router };
