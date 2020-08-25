@@ -2,6 +2,8 @@ const express = require("express");
 const expressIp = require("express-ip");
 const db = require("./db");
 const { analyticsRouter } = require("./routers");
+const { v4 } = require("uuid");
+const createError = require("http-errors");
 
 const app = express();
 
@@ -11,6 +13,23 @@ app.use(expressIp().getIpInfoMiddleware);
 
 app.get("/", (req, res) => { res.sendStatus(200); });
 app.use("/a", analyticsRouter);
+app.use("/p", paymentRouter);
+
+app.use((req, res, next) => {
+	next(createError(404));
+});
+
+app.use((err, req, res, next) => {
+	console.log(err);
+	const { status = 500, message } = err;
+	console.log(`Error Code ${v4()}`)
+	console.log(`Error status: ${status}`);
+	console.log(`Error Message: ${message}`);
+
+	res.status(status).json({
+		message
+	})
+});
 
 const main = () => {
 	db.connect("mongodb://database:27017/", "cosignage", ["visits", "carts"], {
