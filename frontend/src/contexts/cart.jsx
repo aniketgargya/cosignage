@@ -2,6 +2,7 @@ import { createContext, useContext, useEffect, useState, useCallback } from "rea
 import { throttle } from "lodash";
 import axios from "axios";
 import { useUser } from ".";
+import { Cart } from "../types";
 
 const CartContext = createContext({
     cart: {},
@@ -13,8 +14,13 @@ const CartProvider = ({ children }) => {
     const [cart, setCart] = useState({});
 
     useEffect(() => {
-        const newCart = JSON.parse(localStorage.getItem("cart"));
-        if (newCart) setCart(newCart);
+        let newCart = JSON.parse(localStorage.getItem("cart"));
+
+        if (!Cart.guard(newCart)) {
+            newCart = {};
+        }
+
+        setCart(newCart);
     }, []);
 
     const logCart = useCallback(throttle(async (debouncedUserId, debouncedCart) => {

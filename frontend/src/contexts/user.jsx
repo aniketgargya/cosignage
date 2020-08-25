@@ -1,5 +1,6 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import { v1 } from "uuid";
+import { UserId } from "../types";
 
 const UserContext = createContext({
     userId: null
@@ -9,7 +10,12 @@ const UserProvider = ({ children }) => {
     const [userId, setUserId] = useState(null);
 
     useEffect(() => {
-        const newUserId = localStorage.getItem("userId") || v1();
+        let newUserId = localStorage.getItem("userId");
+
+        if (!UserId.guard(newUserId)) {
+            newUserId = v1();
+        }
+
         setUserId(newUserId);
         localStorage.setItem("userId", newUserId);
     }, []);
