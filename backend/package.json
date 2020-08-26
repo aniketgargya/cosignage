@@ -10,10 +10,12 @@
   "author": "Aniket Gargya",
   "license": "ISC",
   "dependencies": {
+    "cookie-parser": "^1.4.5",
     "express": "^4.17.1",
     "express-async-handler": "^1.1.4",
     "express-ip": "^1.0.4",
     "http-errors": "^1.8.0",
+    "jsonwebtoken": "^8.5.1",
     "mongodb": "^3.6.0",
     "runtypes": "^5.0.1",
     "stripe": "^8.89.0",
