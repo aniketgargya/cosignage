@@ -1,54 +1,92 @@
-import { useRef, useState } from "react";
 import axios from "axios";
 import { useCart } from "../contexts";
 import { loadStripe } from "@stripe/stripe-js";
+import { Formik, Field, Form } from "formik";
 import { Cart } from "../types";
 
 const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY);
 
 const Checkout = () => {
-    const { cart, setCart } = useCart();
-    const textRef = useRef(null);
-    const [name, setName] = useState("");
-    const [address, setAddress] = useState("");
+    const { cart } = useCart();
 
     return (
-        <>
-            <pre>{JSON.stringify(cart)}</pre>
-            <textarea ref={textRef}></textarea>
+        Object.keys(cart).length > 0 ? (
+            <>
+                <h2>Shipping Address</h2>
 
-            <form>
-                <h3>Shipping Info</h3>
-                <input placeholder="Name" />
-                <input placeholder="Address" />
+                <Formik
+                    initialValues={{
+                        name: "",
+                        street: "",
+                        lineTwo: "",
+                        city: "",
+                        state: "",
+                        zip: "",
+                        country: ""
+                    }}
+                    onSubmit={async (values, { setSubmitting, setStatus }) => {
+                        setSubmitting(true);
 
-                <button onClick={() => {
-                    setCart(JSON.parse(textRef.current.value));
-                }}>Submit</button>
+                        const stripe = await stripePromise;
 
-                <button onClick={async () => {
-                    const stripe = await stripePromise;
+                        if (Cart.guard(cart)) {
+                            try {
+                                const { data: { id } } = await axios({
+                                    method: "POST",
+                                    url: "/api/p/checkout-session",
+                                    data: {
+                                        cart,
+                                        ...values
+                                    }
+                                });
 
-                    if (Object.keys(cart).length && Cart.guard(cart)) {
-                        const { data: { id } } = await axios({
-                            method: "POST",
-                            url: "/api/p/checkout-session",
-                            data: {
-                                cart
+                                setStatus(undefined);
+
+                                const result = await stripe.redirectToCheckout({
+                                    sessionId: id,
+                                });
+
+                                if (result.error) {
+                                    setStatus("An unknown error occurred");
+                                }
+                            } catch (e) {
+                                if (e) {
+                                    if (e.response.status === 400) {
+                                        setStatus(e.response.data.error || "An unknown error occurred");
+                                    } else if (e.response.status === 500) {
+                                        setStatus("An error occurred on the server");
+                                    } else {
+                                        setStatus("An unknown error occurred");
+                                    }
+                                } else {
+                                    setStatus("An error occurred trying to communicate with the server");
+                                }
+
+                                console.log(e.response);
                             }
-                        });
-
-                        const result = await stripe.redirectToCheckout({
-                            sessionId: id,
-                        });
-
-                        if (result.error) { }
-                    }
-                }}>
-                    Checkout With Stripe
-        </button>
-            </form>
-        </>
+                        }
+                    }}
+                >
+                    {({ isSubmitting, status }) => (
+                        <Form>
+                            <p>{status}</p>
+                            <Field type="text" name="name" placeholder="Name" />
+                            <Field type="text" name="street" placeholder="Street Address" />
+                            <Field type="text" name="lineTwo" placeholder="Street Address Line Two" />
+                            <Field type="text" name="city" placeholder="City" />
+                            <Field type="text" name="state" placeholder="State / Province / Region" />
+                            <Field type="text" name="zip" placeholder="ZIP Code" />
+                            <Field type="text" name="country" placeholder="Country" />
+                            <button type="submit" disabled={isSubmitting}>
+                                Submit
+                            </button>
+                        </Form>
+                    )}
+                </Formik>
+            </>
+        ) : (
+                <p>Nothing in your cart</p>
+            )
     );
 };
 

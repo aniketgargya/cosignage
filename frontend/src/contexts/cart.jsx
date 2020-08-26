@@ -14,7 +14,13 @@ const CartProvider = ({ children }) => {
     const [cart, setCart] = useState({});
 
     useEffect(() => {
-        let newCart = JSON.parse(localStorage.getItem("cart"));
+        let newCart;
+
+        try {
+            newCart = JSON.parse(localStorage.getItem("cart"));
+        } catch (e) {
+            newCart = {};
+        }
 
         if (!Cart.guard(newCart)) {
             newCart = {};

@@ -13,6 +13,7 @@
   "dependencies": {
     "@stripe/stripe-js": "^1.9.0",
     "axios": "^0.19.2",
+    "formik": "^2.1.5",
     "lodash": "^4.17.20",
     "next": "^9.5.2",
     "react": "^16.13.1",

@@ -29,4 +29,4 @@ const Cart = Partial(Object.keys(cartData).reduce((accumulator, currentValue) =>
     }
 });
 
-module.exports = { UserId, Cart, cartData };
+module.exports = { UserId, Cart, String, cartData };
