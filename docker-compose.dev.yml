@@ -6,7 +6,7 @@ services:
       context: ./proxy
       dockerfile: Dockerfile.dev
     env_file:
-      - ./.env.domain
+      - ./env/.env.domain.development
     depends_on:
       - frontend
       - backend
@@ -15,7 +15,8 @@ services:
       - 443:443
   frontend:
     env_file:
-      - ./.env.stripe.development
+      - ./env/.env.stripe.development
+      - ./env/.env.domain.development
     build:
       context: ./frontend
       dockerfile: Dockerfile.dev
@@ -27,7 +28,8 @@ services:
         target: /app/src
   backend:
     env_file:
-      - ./.env.stripe.development
+      - ./env/.env.stripe.development
+      - ./env/.env.domain.development
     build:
       context: ./backend
       dockerfile: Dockerfile.dev

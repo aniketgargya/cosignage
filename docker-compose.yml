@@ -4,7 +4,7 @@ services:
   certification:
     build: ./certification
     env_file:
-      - ./.env.domain
+      - ./env/.env.domain
     volumes:
       - type: volume 
         source: ssl-certificates
@@ -15,7 +15,7 @@ services:
   proxy:
     build: ./proxy
     env_file:
-      - ./.env.domain
+      - ./env/.env.domain
     depends_on:
       - frontend
       - backend
@@ -31,10 +31,14 @@ services:
         target: /var/www/certbot
   frontend:
     build: ./frontend
+    env_file:
+      - ./env/.env.domain
     depends_on:
       - backend
   backend:
     build: ./backend
+    env_file:
+      - ./env/.env.domain
     depends_on:
       - database
   database:
