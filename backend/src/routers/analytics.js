@@ -19,7 +19,7 @@ router.post("/visit", asyncHandler(async (req, res) => {
 
         res.sendStatus(200);
     } else {
-        throw createError(400, undefined);
+        throw createError(400);
     }
 }));
 
@@ -38,7 +38,7 @@ router.post("/cart", asyncHandler(async (req, res) => {
 
         res.sendStatus(200);
     } else {
-        throw createError(400, undefined);
+        throw createError(400);
     }
 }));
 

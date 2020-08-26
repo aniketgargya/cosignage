@@ -21,14 +21,13 @@ app.use((req, res, next) => {
 
 app.use((err, req, res, next) => {
 	console.log(err);
-	const { status = 500, message } = err;
+	const { status = 500, message, jsonResponse } = err;
 	console.log(`Error Code ${v4()}`)
 	console.log(`Error status: ${status}`);
 	console.log(`Error Message: ${message}`);
 
-	res.status(status).json({
-		message
-	})
+	if (!jsonResponse) res.sendStatus(status);
+	else res.status(status).json(jsonResponse);
 });
 
 const main = () => {
