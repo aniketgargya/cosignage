@@ -24,8 +24,8 @@ router.post("/checkout-session", asyncHandler(async (req, res) => {
                 quantity: cart[cartItemId]
             })),
             mode: "payment",
-            success_url: "https://example.com/success",
-            cancel_url: "https://example.com/cancel",
+            success_url: "localhost/success",
+            cancel_url: "localhost/checkout",
             payment_intent_data: {
                 metadata: { "works": "yes?" }
             }
