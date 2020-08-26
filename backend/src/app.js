@@ -1,7 +1,7 @@
 const express = require("express");
 const expressIp = require("express-ip");
 const db = require("./db");
-const { analyticsRouter, paymentRouter, adminRouter } = require("./routers");
+const { analyticsRouter, paymentRouter, otherRouter, adminRouter } = require("./routers");
 const { v4 } = require("uuid");
 const createError = require("http-errors");
 
@@ -14,6 +14,7 @@ app.use(expressIp().getIpInfoMiddleware);
 app.get("/", (req, res) => { res.sendStatus(200); });
 app.use("/a", analyticsRouter);
 app.use("/p", paymentRouter);
+app.use("/o", otherRouter);
 app.use("/s", adminRouter);
 
 app.use((req, res, next) => {
@@ -32,7 +33,7 @@ app.use((err, req, res, next) => {
 });
 
 const main = async () => {
-	await db.connect("mongodb://database:27017/", "cosignage", ["visits", "carts", "accounts", "tokens"], {
+	await db.connect("mongodb://database:27017/", "cosignage", ["visits", "carts", "messages"], {
 		useUnifiedTopology: true,
 		useNewUrlParser: true,
 		poolSize: 50

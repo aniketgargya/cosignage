@@ -11,7 +11,6 @@ const stringWithoutValue = s => !String.guard(s) || s.trim() === "";
 router.post("/checkout-session", asyncHandler(async (req, res) => {
     const { cart, name, street, lineTwo = "", city, state, zip, country } = req.body;
 
-    console.log(Object.keys(cart).length > 0);
     if (!Cart.guard(cart) || Object.keys(cart).length === 0) throw new createError(400, undefined, { jsonResponse: { error: "Invalid Cart" } });
     if (stringWithoutValue(name)) throw new createError(400, undefined, { jsonResponse: { error: "Name cannot be empty" } });
     if (stringWithoutValue(street)) throw new createError(400, undefined, { jsonResponse: { error: "Street Address cannot be empty" } });

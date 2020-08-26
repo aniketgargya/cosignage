@@ -42,8 +42,14 @@ router.use(asyncHandler(async (req, res, next) => {
     }
 }));
 
-router.get("/", (req, res, next) => {
+router.get("/", (req, res) => {
     res.sendStatus(200);
 });
+
+
+router.get("/messages", asyncHandler(async (req, res) => {
+    const response = await db.messages.find().toArray();
+    res.json({ data: response });
+}));
 
 module.exports = { router };
