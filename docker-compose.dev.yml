@@ -30,6 +30,7 @@ services:
     env_file:
       - ./env/.env.stripe.development
       - ./env/.env.domain.development
+      - ./env/.env.backend.development
     build:
       context: ./backend
       dockerfile: Dockerfile.dev

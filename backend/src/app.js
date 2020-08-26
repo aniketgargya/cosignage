@@ -1,10 +1,9 @@
 const express = require("express");
 const expressIp = require("express-ip");
 const db = require("./db");
-const { analyticsRouter, paymentRouter } = require("./routers");
+const { analyticsRouter, paymentRouter, adminRouter } = require("./routers");
 const { v4 } = require("uuid");
 const createError = require("http-errors");
-const cookieParser = require("cookie-parser");
 
 const app = express();
 
@@ -15,10 +14,7 @@ app.use(expressIp().getIpInfoMiddleware);
 app.get("/", (req, res) => { res.sendStatus(200); });
 app.use("/a", analyticsRouter);
 app.use("/p", paymentRouter);
-app.use("/s", cookieParser(), (req, res) => {
-	console.log(req.cookies);
-	res.sendStatus(200);
-});
+app.use("/s", adminRouter);
 
 app.use((req, res, next) => {
 	next(createError(404));
