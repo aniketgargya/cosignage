@@ -1,7 +1,6 @@
 const express = require("express");
 const asyncHandler = require("express-async-handler");
 const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
-const db = require("../db");
 const { Cart, cartData, String } = require("../types");
 const createError = require("http-errors");
 

@@ -35,8 +35,8 @@ app.use((err, req, res, next) => {
 	else res.status(status).json(jsonResponse);
 });
 
-const main = () => {
-	db.connect("mongodb://database:27017/", "cosignage", ["visits", "carts"], {
+const main = async () => {
+	await db.connect("mongodb://database:27017/", "cosignage", ["visits", "carts", "accounts", "tokens"], {
 		useUnifiedTopology: true,
 		useNewUrlParser: true,
 		poolSize: 50

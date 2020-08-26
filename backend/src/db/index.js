@@ -7,6 +7,8 @@ const db = {
         for (let i = 0; i < collections.length; i++) {
             this[collections[i]] = await this.client.db(database).collection(collections[i]);
         }
+
+        console.log("Database connnected");
     }
 };
 
