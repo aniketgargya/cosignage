@@ -1,5 +1,5 @@
 import axios from "axios";
-import { useCart } from "../contexts";
+import { useCart, useUser } from "../contexts";
 import { loadStripe } from "@stripe/stripe-js";
 import { Formik, Field, Form } from "formik";
 import { Cart } from "../types";
@@ -8,6 +8,7 @@ const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY)
 
 const Checkout = () => {
     const { cart } = useCart();
+    const { userId } = useUser();
 
     return (
         Object.keys(cart).length > 0 ? (
@@ -35,6 +36,7 @@ const Checkout = () => {
                                     method: "POST",
                                     url: "/api/p/checkout-session",
                                     data: {
+                                        userId,
                                         cart,
                                         ...values
                                     }

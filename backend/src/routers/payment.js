@@ -9,7 +9,7 @@ const router = express.Router();
 const stringWithoutValue = s => !String.guard(s) || s.trim() === "";
 
 router.post("/checkout-session", asyncHandler(async (req, res) => {
-    const { cart, name, street, lineTwo = "", city, state, zip, country } = req.body;
+    const { userId, cart, name, street, lineTwo = "", city, state, zip, country } = req.body;
 
     if (!Cart.guard(cart) || Object.keys(cart).length === 0) throw new createError(400, undefined, { jsonResponse: { error: "Invalid Cart" } });
     if (stringWithoutValue(name)) throw new createError(400, undefined, { jsonResponse: { error: "Name cannot be empty" } });
@@ -36,7 +36,7 @@ router.post("/checkout-session", asyncHandler(async (req, res) => {
         success_url: `http://${process.env.DOMAIN}/success`,
         cancel_url: `http://${process.env.DOMAIN}/checkout`,
         payment_intent_data: {
-            metadata: { name, street, lineTwo, city, state, zip, country }
+            metadata: { userId, name, street, lineTwo, city, state, zip, country }
         }
     });
 
