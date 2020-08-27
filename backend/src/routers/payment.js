@@ -20,7 +20,7 @@ router.post("/checkout-session",
     ],
     validate,
     asyncHandler(async (req, res) => {
-        const { userId, cart, name, street, lineTwo, city, state, zip, country } = req.body;
+        const { userId, ipInfo, cart, name, street, lineTwo, city, state, zip, country } = req.body;
 
         const { id } = await stripe.checkout.sessions.create({
             payment_method_types: ["card"],
@@ -38,7 +38,7 @@ router.post("/checkout-session",
             success_url: `http://${process.env.DOMAIN}/success`,
             cancel_url: `http://${process.env.DOMAIN}/checkout`,
             payment_intent_data: {
-                metadata: { userId, name, street, lineTwo, city, state, zip, country }
+                metadata: { userId, ipInfo, name, street, lineTwo, city, state, zip, country }
             }
         });
 

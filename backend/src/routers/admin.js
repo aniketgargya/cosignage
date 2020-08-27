@@ -4,8 +4,9 @@ const db = require("../db");
 const jwt = require("jsonwebtoken");
 const cookieParser = require("cookie-parser");
 const crypto = require("crypto");
-const { body } = require("express-validator");
+const { body, query } = require("express-validator");
 const { validate } = require("../middleware");
+const createError = require("http-errors");
 
 const router = express.Router();
 
@@ -45,9 +46,41 @@ router.get("/", (req, res) => {
 });
 
 
-router.get("/messages", asyncHandler(async (req, res) => {
-    const response = await db.messages.find().toArray();
-    res.json({ data: response });
-}));
+router.get("/messages",
+    [
+        query("skip").isNumeric().withMessage("Skip must be a number").toInt(),
+        query("limit").isNumeric().withMessage("Limit must be a number").toInt()
+    ],
+    validate,
+    asyncHandler(async (req, res) => {
+        const { skip, limit, ip, userId } = req.query;
+        const response = await db.messages.find({ ip, userId }).skip(skip).limit(limit).toArray();
+        res.json({ data: response });
+    })
+);
+
+router.get("/visits",
+    [
+        query("skip").isNumeric().withMessage("Skip must be a number").toInt(),
+        query("limit").isNumeric().withMessage("Limit must be a number").toInt()
+    ],
+    asyncHandler(async (req, res) => {
+        const { skip, limit, ip, userId } = req.query;
+        const response = await db.visits.find({ "ipInfo.ip": ip, userId }).skip(skip).limit(limit).toArray();
+        res.json({ data: response });
+    })
+);
+
+router.get("/carts",
+    [
+        query("skip").isNumeric().withMessage("Skip must be a number").toInt(),
+        query("limit").isNumeric().withMessage("Limit must be a number").toInt()
+    ],
+    asyncHandler(async (req, res) => {
+        const { skip, limit, ip, userId } = req.query;
+        const response = await db.visits.find({ "ipInfo.ip": ip, userId }).skip(skip).limit(limit).toArray();
+        res.json({ data: response });
+    })
+);
 
 module.exports = { router };

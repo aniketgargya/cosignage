@@ -15,9 +15,9 @@ router.post("/message",
     ],
     validate,
     asyncHandler(async (req, res) => {
-        const { name, businessName, email, message } = req.body;
+        const { userId, name, businessName, email, message } = req.body;
 
-        await db.messages.insertOne({ name, businessName, email, message });
+        await db.messages.insertOne({ userId, name, businessName, email, message });
 
         res.sendStatus(200);
     })
