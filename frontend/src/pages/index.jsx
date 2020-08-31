@@ -1,4 +1,4 @@
-import { useCart } from "../contexts";
+import style from "../styles/index.css";
 
 const Index = () => {
     return (

@@ -14,6 +14,7 @@ const App = ({ Component, pageProps }) => {
                     <CartProvider>
                         <Head>
                             <link href="https://fonts.googleapis.com/css2?family=Varela+Round&display=swap" rel="stylesheet" />
+                            <link rel="icon" type="image/png" href="/img/icon/favicon.png" />
                         </Head>
                         <NavBar />
                         <Component {...pageProps} />
