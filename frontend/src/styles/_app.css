@@ -19,3 +19,16 @@ body {
     font-weight: 400;
     line-height: 1.6;
 }
+
+:root {
+    --color-primary: "#662D91";
+    --color-primary-dark: "#2D054B";
+
+    --color-gray-dark-1: "#565656";
+    --color-gray-dark-2: "#333333";
+    --color-gray-light-1: "#FAFAFA";
+    --color-gray-light-2: "#F4F4F4";
+
+    --color-white: "#FFFFFF";
+    --color-black: "#000000";
+}
