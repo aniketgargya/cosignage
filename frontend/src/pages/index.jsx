@@ -1,9 +1,6 @@
-import { v4 } from "uuid";
 import { useCart } from "../contexts";
 
 const Index = () => {
-    const { cart, setCart } = useCart();
-
     return (
         <>
             <style jsx>{`
@@ -112,19 +109,6 @@ const Index = () => {
                     <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Temporibus rerum iusto nulla quibusdam odit saepe iure cupiditate eum optio perspiciatis tenetur, cum eius odio pariatur!</p>
                 </div>
             </header>
-            <section className="contact-us">
-                <a>
-                    <span className="contact-button">
-                        Contact Us
-                    </span>
-                </a>
-            </section>
-            {/* <pre>{JSON.stringify(cart)}</pre>
-            <button onClick={() => {
-                setCart({
-                    hey: v4()
-                });
-            }}>Modify Cart</button> */}
         </>
     );
 };
