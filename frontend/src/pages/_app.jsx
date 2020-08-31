@@ -1,5 +1,4 @@
-import { ThemeProvider } from "styled-components";
-import { UserProvider, CartProvider, theme } from "../contexts";
+import { UserProvider, CartProvider } from "../contexts";
 import { VisitLogger, NavBar } from "../components";
 import Head from "next/head";
 import styles from "../styles/_app.css";
@@ -13,13 +12,11 @@ const App = ({ Component, pageProps }) => {
             <UserProvider>
                 <VisitLogger>
                     <CartProvider>
-                        <ThemeProvider theme={theme}>
-                            <Head>
-                                <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Lato" />
-                            </Head>
-                            <NavBar />
-                            <Component {...pageProps} />
-                        </ThemeProvider>
+                        <Head>
+                            <link href="https://fonts.googleapis.com/css2?family=Varela+Round&display=swap" rel="stylesheet" />
+                        </Head>
+                        <NavBar />
+                        <Component {...pageProps} />
                     </CartProvider>
                 </VisitLogger>
             </UserProvider>
