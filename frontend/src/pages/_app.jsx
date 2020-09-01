@@ -1,5 +1,5 @@
 import { UserProvider, CartProvider } from "../contexts";
-import { VisitLogger, NavBar } from "../components";
+import { VisitLogger, NavBar, CustomFooter } from "../components";
 import Head from "next/head";
 import styles from "../styles/pages/_app.css";
 
@@ -18,6 +18,7 @@ const App = ({ Component, pageProps }) => {
                         </Head>
                         <NavBar />
                         <Component {...pageProps} />
+                        <CustomFooter />
                     </CartProvider>
                 </VisitLogger>
             </UserProvider>
