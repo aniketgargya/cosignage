@@ -32,6 +32,45 @@ const Index = () => {
                     />
                 </div>
             </section>
+
+            <section className="our-signs">
+                <h1>Our Signs</h1>
+                <div className="signs">
+                    {
+                        [
+                            {
+                                imageUrl: "/img/signs/mask-required.png",
+                                sign: "Mask Required"
+                            },
+                            {
+                                imageUrl: "/img/signs/delivery.png",
+                                sign: "Delivery"
+                            },
+                            {
+                                imageUrl: "/img/signs/curbside-pickup.png",
+                                sign: "Curbside Pickup"
+                            },
+                            {
+                                imageUrl: "/img/signs/outdoor-seating.png",
+                                sign: "Outdoor Seating"
+                            },
+                            {
+                                imageUrl: "/img/signs/max-capacity.png",
+                                sign: "Max Capacity"
+                            },
+                            {
+                                imageUrl: "/img/signs/minority-owned.png",
+                                sign: "Minority Owned"
+                            }
+                        ].map(({ imageUrl, sign }, i) => (
+                            <div key={i} className="sign">
+                                <img src={imageUrl} />
+                                <span>{sign}</span>
+                            </div>
+                        ))
+                    }
+                </div>
+            </section>
         </>
     );
 };
