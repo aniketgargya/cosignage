@@ -1,0 +1,43 @@
+/* @styled-jsx=scoped */
+
+header {
+    width: 100%;
+    background-color: var(--color-gray-light-1);
+    
+    display: flex;
+}
+
+header .hero-image {
+    width: 50%;
+    align-self: center;
+    content: url("/img/hero-image-vertical.jpg");
+}
+
+header .text {
+    flex: 1;
+    padding: 30px 48px;
+    text-align: right;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+header .text h1 {
+    margin-bottom: 15px;
+}
+
+@media only screen and (max-width: 900px) {
+    header {
+        flex-direction: column;
+    }
+
+    header .hero-image {
+        width: 100%;
+        content: url("/img/hero-image-horizontal.jpg");
+    }
+
+    header .text {
+        text-align: left;
+    }
+}

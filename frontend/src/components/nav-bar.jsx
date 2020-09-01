@@ -1,7 +1,7 @@
 import { useState, useRef, useEffect } from "react";
 import { HamburgerSpin } from "react-animated-burgers";
 import Link from "next/link";
-import styles from "../styles/nav-bar.css";
+import styles from "../styles/components/nav-bar.css";
 
 const NavBar = () => {
     const [sidebarOpen, setSidebarOpen] = useState(false);

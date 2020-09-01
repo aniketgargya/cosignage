@@ -44,3 +44,19 @@ p {
     line-height: 150%;
     font-weight: 400;
 }
+
+@media only screen and (max-width: 1200px) {
+    h1 {
+        font-size: 38px;
+    }
+
+    p {
+        font-size: 14px;
+    }
+}
+
+@media only screen and (max-width: 500px) {
+    h1 {
+        font-size: 32px;
+    }
+}
