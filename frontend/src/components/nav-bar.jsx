@@ -18,7 +18,11 @@ const NavBar = () => {
 
             <nav>
                 <div className="logo-container">
-                    <img className="logo" src="/img/logo.png" />
+                    <Link href="/">
+                        <a>
+                            <img className="logo" src="/img/logo.png" />
+                        </a>
+                    </Link>
                 </div>
 
                 <ul className="links" ref={links}>
