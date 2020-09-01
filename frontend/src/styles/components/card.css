@@ -1,0 +1,31 @@
+.card {
+    background-color: var(--color-primary-dark);
+    width: 250px;
+    min-height: 325px;
+    padding: 25px 40px;
+    border-radius: 7px;
+}
+
+.card img {
+    height: 60px;
+    width: 60px;
+    display: block;
+    margin: 0 auto 30px auto;
+}
+
+.card .title, .card .description {
+    color: var(--color-white);
+    text-align: center;
+}
+
+.card .title {
+    display: block;
+    font-size: 26px;
+    margin-bottom: 30px;
+}
+
+.card .description {
+    display: inline-block;
+    font-size: 18px;
+    text-align: center;
+}

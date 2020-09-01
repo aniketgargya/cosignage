@@ -1,4 +1,5 @@
 import style from "../styles/pages/index.css";
+import { Card } from "../components/card";
 
 const Index = () => {
     return (
@@ -11,18 +12,24 @@ const Index = () => {
                     <p>Cosignage is a Coronavirus-communication Signage meant to assist you and your business in advertising your services to consumers during the COVID-19 pandemic. Universally recognizable and easily customizable, Cosignage is the perfect choice to aid your business in recovering from  the coronavirus pandemic.</p>
                 </div>
             </header>
-            <section>
-                <div className="card">
-                    <span className="title">Recognizable</span>
-                    <p className="description">Visible from afar and universally uniform.</p>
-                </div>
-                <div className="card">
-                    <span className="title">Customizable</span>
-                    <p className="description">Choose from six visuals and a variety of sizes to meet your business' specific needs.</p>
-                </div>
-                <div className="card">
-                    <span className="title">Affordable</span>
-                    <p className="description">Accessible to all business of all sizes.</p>
+
+            <section className="cards-container">
+                <div className="cards">
+                    <Card
+                        iconUrl="/img/icon/world.svg#world"
+                        title="Recognizable"
+                        description="Visible from afar and universally uniform."
+                    />
+                    <Card
+                        iconUrl="/img/icon/pencil.svg#pencil"
+                        title="Customizable"
+                        description="Choose from six visuals and a variety of sizes to meet your business' specific needs."
+                    />
+                    <Card
+                        iconUrl="/img/icon/dollar.svg#dollar"
+                        title="Affordable"
+                        description="Accessible to all business of all sizes."
+                    />
                 </div>
             </section>
         </>
