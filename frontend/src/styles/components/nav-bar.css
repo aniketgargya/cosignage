@@ -1,6 +1,9 @@
 nav {
     padding: 32px 48px;
     width: 100%;
+    position: relative;
+    background-color: var(--color-white);
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.269);
     
     display: flex;
     align-items: center;
@@ -36,7 +39,7 @@ nav {
     z-index: 100;
 }
 
-a::before {
+.links a::before {
     content: "";
     position: absolute;
     width: 100%;
@@ -49,7 +52,7 @@ a::before {
     transition: all 0.2s ease-in-out 0s;
 }
 
-a:hover::before {
+.links a:hover::before {
     visibility: visible;
     transform: scaleX(1);
 }
