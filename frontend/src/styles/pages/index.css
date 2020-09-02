@@ -10,7 +10,7 @@ header {
 header .hero-image {
     width: 50%;
     align-self: center;
-    content: url("/img/hero-image-vertical.jpg");
+    content: url("/img/big/hero2-vertical.jpg");
 }
 
 header .text {
@@ -84,7 +84,7 @@ header .text h1 {
 
     header .hero-image {
         width: 100%;
-        content: url("/img/hero-image-horizontal.jpg");
+        content: url("/img/big/hero2-horizontal.jpg");
     }
 
     header .text {
