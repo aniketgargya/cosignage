@@ -14,7 +14,7 @@ html {
 }
 
 body {
-    font-family: "Varela Round", sans-serif;
+    font-family: "Nunito", sans-serif;
     font-weight: 400;
 }
 
@@ -38,6 +38,12 @@ h1 {
     font-weight: 400;
 }
 
+h2 {
+    font-size: 28px;
+    color: var(--color-gray-dark-2);
+    font-weight: 400;
+}
+
 p {
     font-size: 18px;
     color: var(--color-gray-dark-1);
@@ -50,6 +56,10 @@ p {
         font-size: 38px;
     }
 
+    h2 {
+        font-size: 30px;
+    }
+
     p {
         font-size: 14px;
     }
@@ -58,5 +68,9 @@ p {
 @media only screen and (max-width: 500px) {
     h1 {
         font-size: 32px;
+    }
+
+    h2 {
+        font-size: 24px;
     }
 }
