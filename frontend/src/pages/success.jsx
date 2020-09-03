@@ -1,9 +1,6 @@
 import { useEffect } from "react";
-import { useCart } from "../contexts";
 
 const Checkout = () => {
-    useCart();
-
     useEffect(() => {
         localStorage.setItem("cart", JSON.stringify({}));
     });

@@ -1,0 +1,17 @@
+button {
+    padding: 12px 40px;
+    border: none;
+    font-size: 15px;
+    color: white;
+    background-color: var(--color-primary);
+    font: inherit;
+    border-radius: 3px;
+    transition: all .2s;
+    cursor: pointer;
+    outline: none;
+}
+
+button:disabled {
+    background-color: var(--color-primary-dark);
+    cursor: default;
+}

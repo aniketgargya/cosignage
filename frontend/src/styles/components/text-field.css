@@ -1,0 +1,10 @@
+label {
+    color: var(--color-gray-dark-2)
+}
+input {
+    padding: 10px;
+    width: 100%;
+    outline: none;
+    display: block;
+    font: inherit;
+}
