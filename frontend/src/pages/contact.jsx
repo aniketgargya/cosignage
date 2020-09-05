@@ -1,8 +1,9 @@
 import style from "../styles/pages/contact.css";
 import { Formik, Field, Form } from "formik";
-import { TextField, CustomButtom } from "../components";
+import axios from "axios";
+import { TextField, CustomButtom, Message } from "../components";
 
-const Index = () => {
+const Contact = () => {
     return (
         <>
             <style jsx>{style}</style>
@@ -20,60 +21,52 @@ const Index = () => {
                         }}
                         onSubmit={async (values, { setSubmitting, setStatus }) => {
                             setSubmitting(true);
-                            await new Promise((resolve, reject) => {
-                                setTimeout(resolve, 4000);
-                            });
-                            setSubmitting(false);
 
-                            // const stripe = await stripePromise;
+                            try {
+                                const { data } = await axios({
+                                    method: "POST",
+                                    url: "/api/o/message",
+                                    data: {
+                                        ...values
+                                    }
+                                });
 
-                            // if (Cart.guard(cart)) {
-                            //     try {
-                            //         const { data: { id } } = await axios({
-                            //             method: "POST",
-                            //             url: "/api/p/checkout-session",
-                            //             data: {
-                            //                 userId,
-                            //                 cart,
-                            //                 ...values
-                            //             }
-                            //         });
-
-                            //         setStatus(undefined);
-
-                            //         const result = await stripe.redirectToCheckout({
-                            //             sessionId: id,
-                            //         });
-
-                            //         if (result.error) {
-                            //             setStatus("An unknown error occurred");
-                            //         }
-                            //     } catch (e) {
-                            //         if (e) {
-                            //             if (e.response.status === 400) {
-                            //                 setStatus(e.response.data.error || "An unknown error occurred");
-                            //             } else if (e.response.status === 500) {
-                            //                 setStatus("An error occurred on the server");
-                            //             } else {
-                            //                 setStatus("An unknown error occurred");
-                            //             }
-                            //         } else {
-                            //             setStatus("An error occurred trying to communicate with the server");
-                            //         }
-
-                            //         console.log(e.response);
-                            //     }
-                            // }
+                                setStatus({ success: true, message: "Message has been sent" });
+                            } catch (e) {
+                                if (e) {
+                                    if (e.response.status === 400) {
+                                        setStatus({
+                                            success: false,
+                                            message: e.response.data.message || "An unknown error occurred"
+                                        });
+                                    } else if (e.response.status === 500) {
+                                        setStatus({
+                                            success: false,
+                                            message: `An error occurred on the server ${e.response.data.errorCode}`
+                                        });
+                                    } else {
+                                        setStatus({
+                                            success: false,
+                                            message: "An unknown error occurred"
+                                        });
+                                    }
+                                } else {
+                                    setStatus({
+                                        success: false,
+                                        message: "An error occurred trying to communicate with the server"
+                                    });
+                                }
+                            }
                         }}
                     >
                         {({ isSubmitting, status }) => (
                             <Form className="contact-form">
-                                <p>{status}</p>
                                 <Field type="text" name="name" label="Name" placeholder="Name" as={TextField} />
                                 <Field type="text" name="businessName" label="Business Name" placeholder="Business Name" as={TextField} />
                                 <Field type="text" name="email" label="Email" placeholder="Email" as={TextField} />
                                 <Field type="text" name="message" label="Message" placeholder="Message" as={TextField} />
                                 <Field type="submit" value="Submit" disabled={isSubmitting} as={CustomButtom} />
+                                {status && <Message {...status} />}
                             </Form>
                         )}
                     </Formik>
@@ -90,4 +83,4 @@ const Index = () => {
     );
 };
 
-export default Index;
+export default Contact;

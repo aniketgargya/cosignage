@@ -9,6 +9,7 @@ const router = express.Router();
 router.post("/message",
     [
         body("name").trim().isLength({ min: 1 }).withMessage({ status: 400, message: "Name cannot be empty" }),
+        body("businessName").trim().customSanitizer(businessName => businessName === "" ? undefined : businessName),
         body("email").isEmail().withMessage({ status: 400, message: "Email must be a valid email" }),
         body("message").isLength({ min: 1 }).withMessage({ status: 400, message: "Message cannot be empty" }),
     ],
