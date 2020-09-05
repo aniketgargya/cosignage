@@ -22,14 +22,16 @@ app.use((req, res, next) => {
 });
 
 app.use((err, req, res, next) => {
-	console.log(err);
-	const { status = 500, message, jsonResponse } = err;
-	console.log(`Error Code ${v4()}`)
-	console.log(`Error status: ${status}`);
-	console.log(`Error Message: ${message}`);
+	const { status = 500, responseData } = err;
+	const errorCode = v4();
 
-	if (!jsonResponse) res.sendStatus(status);
-	else res.status(status).json(jsonResponse);
+	if (errorCode === 500) {
+		console.log(`Error Code ${errorCode}`)
+		console.log(`Error status: ${responseData}`);
+	}
+
+	if (status === 500) res.status(status).json({ responseData: { errorCode } });
+	else res.status(status).json({ responseData });
 });
 
 const main = async () => {

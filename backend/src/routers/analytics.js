@@ -9,7 +9,7 @@ const router = express.Router();
 
 router.post("/visit",
     [
-        body("userId").custom(userId => UserId.guard(userId)).withMessage("Invalid userId")
+        body("userId").custom(userId => UserId.guard(userId)).withMessage({ status: 400, message: "Invalid User Id" })
     ],
     validate,
     asyncHandler(async (req, res) => {
@@ -29,8 +29,8 @@ router.post("/visit",
 
 router.post("/cart",
     [
-        body("userId").custom(userId => UserId.guard(userId)).withMessage("Invalid userId"),
-        body("cart").custom(cart => Cart.guard(cart)).withMessage("Invalid cart")
+        body("userId").custom(userId => UserId.guard(userId)).withMessage({ status: 400, message: "Invalid User Id" }),
+        body("cart").custom(cart => Cart.guard(cart)).withMessage({ status: 400, message: "Invalid Cart" })
     ],
     validate,
     asyncHandler(async (req, res) => {

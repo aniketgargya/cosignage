@@ -7,16 +7,21 @@ const { validate } = require("../middleware");
 
 const router = express.Router();
 
+router.get("/product/:productId", () => {
+
+});
+
 router.post("/checkout-session",
     [
-        body("cart").custom(cart => Cart.guard(cart)).withMessage("Invalid cart")
-            .custom(cart => Object.keys(cart).length > 0).withMessage("Cart cannot be empty"),
-        body("name").isLength({ min: 1 }).withMessage("Name cannot be empty"),
-        body("street").isLength({ min: 1 }).withMessage("Street Address cannot be empty"),
-        body("city").isLength({ min: 1 }).withMessage("City cannot be empty"),
-        body("state").isLength({ min: 1 }).withMessage("State/Province/Region cannot be empty"),
-        body("zip").isLength({ min: 1 }).withMessage("ZIP/Postal Code cannot be empty"),
-        body("country").isLength({ min: 1 }).withMessage("Country cannot be empty")
+        body("cart").custom(cart => Cart.guard(cart)).withMessage({ status: 400, message: "Invalid cart" })
+            .custom(cart => Object.keys(cart).length > 0).withMessage({ status: 400, message: "Cart cannot be empty" }),
+        body("name").isLength({ min: 1 }).withMessage({ status: 400, message: "Name cannot be empty" }),
+        body("street").isLength({ min: 1 }).withMessage({ status: 400, message: "Street Address cannot be empty" }),
+        body("city").isLength({ min: 1 }).withMessage({ status: 400, message: "City cannot be empty" }),
+        body("state").isLength({ min: 1 }).withMessage({ status: 400, message: "State/Province/Region cannot be empty" }),
+        body("zip").isLength({ min: 1 }).withMessage({ status: 400, message: "ZIP/Postal Code cannot be empty" })
+            .custom(zip => ["61874", "00000"].includes(zip)).withMessage({ status: 400, message: "Sorry, we do not deliever to that location yet" }),
+        body("country").isLength({ min: 1 }).withMessage({ status: 400, message: "Country cannot be empty" })
     ],
     validate,
     asyncHandler(async (req, res) => {

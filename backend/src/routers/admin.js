@@ -14,7 +14,7 @@ router.use(cookieParser());
 
 router.post("/sign-in",
     [
-        body("password").isLength({ min: 1 }).withMessage("Please enter a password")
+        body("password").isLength({ min: 1 }).withMessage({ status: 400, message: "Please enter a password" })
     ],
     validate,
     asyncHandler(async (req, res) => {
@@ -48,8 +48,8 @@ router.get("/", (req, res) => {
 
 router.get("/messages",
     [
-        query("skip").isNumeric().withMessage("Skip must be a number").toInt(),
-        query("limit").isNumeric().withMessage("Limit must be a number").toInt()
+        query("skip").isNumeric().withMessage({ status: 400, message: "Skip must be a number" }).toInt(),
+        query("limit").isNumeric().withMessage({ status: 400, message: "Limit must be a number" }).toInt()
     ],
     validate,
     asyncHandler(async (req, res) => {
@@ -61,8 +61,8 @@ router.get("/messages",
 
 router.get("/visits",
     [
-        query("skip").isNumeric().withMessage("Skip must be a number").toInt(),
-        query("limit").isNumeric().withMessage("Limit must be a number").toInt()
+        query("skip").isNumeric().withMessage({ status: 400, message: "Skip must be a number" }).toInt(),
+        query("limit").isNumeric().withMessage({ status: 400, message: "Limit must be a number" }).toInt()
     ],
     asyncHandler(async (req, res) => {
         const { skip, limit, ip, userId } = req.query;
@@ -73,8 +73,8 @@ router.get("/visits",
 
 router.get("/carts",
     [
-        query("skip").isNumeric().withMessage("Skip must be a number").toInt(),
-        query("limit").isNumeric().withMessage("Limit must be a number").toInt()
+        query("skip").isNumeric().withMessage({ status: 400, message: "Skip must be a number" }).toInt(),
+        query("limit").isNumeric().withMessage({ status: 400, message: "Limit must be a number" }).toInt()
     ],
     asyncHandler(async (req, res) => {
         const { skip, limit, ip, userId } = req.query;
