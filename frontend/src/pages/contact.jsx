@@ -23,7 +23,7 @@ const Contact = () => {
                             setSubmitting(true);
 
                             try {
-                                const { data } = await axios({
+                                await axios({
                                     method: "POST",
                                     url: "/api/o/message",
                                     data: {

@@ -30,7 +30,10 @@ router.post("/visit",
 router.post("/cart",
     [
         body("userId").custom(userId => UserId.guard(userId)).withMessage({ status: 400, message: "Invalid User Id" }),
-        body("cart").custom(cart => Cart.guard(cart)).withMessage({ status: 400, message: "Invalid Cart" })
+        body("cart").custom(async cart => {
+            const response = await Cart.guard(cart);
+            if (!response) return Promise.reject();
+        }).withMessage({ status: 400, message: "Invalid cart" })
     ],
     validate,
     asyncHandler(async (req, res) => {

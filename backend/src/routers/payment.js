@@ -1,11 +1,24 @@
 const express = require("express");
 const asyncHandler = require("express-async-handler");
 const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
-const { Cart, cartData } = require("../types");
+const { Cart } = require("../types");
 const { body } = require("express-validator");
 const { validate } = require("../middleware");
 
 const router = express.Router();
+
+router.post("/cart",
+    [
+        body("cart").custom(async cart => {
+            const response = await Cart.guard(cart);
+            if (!response) return Promise.reject();
+        }).withMessage({ status: 400, message: "Invalid cart" })
+    ],
+    validate,
+    (req, res) => {
+        res.sendStatus(200);
+    }
+);
 
 router.get("/product/:productId", () => {
 

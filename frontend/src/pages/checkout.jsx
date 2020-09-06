@@ -2,7 +2,6 @@ import axios from "axios";
 import { useCart, useUser } from "../contexts";
 import { loadStripe } from "@stripe/stripe-js";
 import { Formik, Field, Form } from "formik";
-import { Cart } from "../types";
 
 const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY);
 
@@ -30,42 +29,40 @@ const Checkout = () => {
 
                         const stripe = await stripePromise;
 
-                        if (Cart.guard(cart)) {
-                            try {
-                                const { data: { id } } = await axios({
-                                    method: "POST",
-                                    url: "/api/p/checkout-session",
-                                    data: {
-                                        userId,
-                                        cart,
-                                        ...values
-                                    }
-                                });
+                        try {
+                            const { data: { id } } = await axios({
+                                method: "POST",
+                                url: "/api/p/checkout-session",
+                                data: {
+                                    userId,
+                                    cart,
+                                    ...values
+                                }
+                            });
 
-                                setStatus(undefined);
+                            setStatus(undefined);
 
-                                const result = await stripe.redirectToCheckout({
-                                    sessionId: id,
-                                });
+                            const result = await stripe.redirectToCheckout({
+                                sessionId: id,
+                            });
 
-                                if (result.error) {
+                            if (result.error) {
+                                setStatus("An unknown error occurred");
+                            }
+                        } catch (e) {
+                            if (e) {
+                                if (e.response.status === 400) {
+                                    setStatus(e.response.data.error || "An unknown error occurred");
+                                } else if (e.response.status === 500) {
+                                    setStatus("An error occurred on the server");
+                                } else {
                                     setStatus("An unknown error occurred");
                                 }
-                            } catch (e) {
-                                if (e) {
-                                    if (e.response.status === 400) {
-                                        setStatus(e.response.data.error || "An unknown error occurred");
-                                    } else if (e.response.status === 500) {
-                                        setStatus("An error occurred on the server");
-                                    } else {
-                                        setStatus("An unknown error occurred");
-                                    }
-                                } else {
-                                    setStatus("An error occurred trying to communicate with the server");
-                                }
-
-                                console.log(e.response);
+                            } else {
+                                setStatus("An error occurred trying to communicate with the server");
                             }
+
+                            console.log(e.response);
                         }
                     }}
                 >

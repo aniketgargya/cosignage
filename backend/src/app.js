@@ -35,7 +35,7 @@ app.use((err, req, res, next) => {
 });
 
 const main = async () => {
-	await db.connect("mongodb://database:27017/", "cosignage", ["visits", "carts", "messages"], {
+	await db.connect("mongodb://database:27017/", "cosignage", ["visits", "carts", "messages", "items"], {
 		useUnifiedTopology: true,
 		useNewUrlParser: true,
 		poolSize: 50

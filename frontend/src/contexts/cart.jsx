@@ -2,35 +2,36 @@ import { createContext, useContext, useEffect, useState, useCallback } from "rea
 import { throttle } from "lodash";
 import axios from "axios";
 import { useUser } from ".";
-import { UserId, Cart } from "../types";
 
 const CartContext = createContext({
-    cart: {},
+    cart: [],
     setCart: () => { }
 });
 
 const CartProvider = ({ children }) => {
     const { userId } = useUser();
-    const [cart, setCart] = useState({});
+    const [cart, setCart] = useState([]);
+
+    const retrieveCart = async () => {
+        try {
+            const cart = JSON.parse(localStorage.getItem("cart"));
+
+            await axios({
+                method: "POST",
+                url: "/api/p/cart",
+                data: { cart }
+            });
+        } catch {
+            setCart([]);
+        }
+    };
 
     useEffect(() => {
-        let newCart;
-
-        try {
-            newCart = JSON.parse(localStorage.getItem("cart"));
-        } catch (e) {
-            newCart = {};
-        }
-
-        if (!Cart.guard(newCart)) {
-            newCart = {};
-        }
-
-        setCart(newCart);
+        retrieveCart();
     }, []);
 
     const logCart = useCallback(throttle(async (debouncedUserId, debouncedCart) => {
-        if (UserId.guard(debouncedUserId) && Cart.guard(debouncedCart)) {
+        try {
             await axios({
                 url: "/api/a/cart",
                 method: "POST",
@@ -39,12 +40,12 @@ const CartProvider = ({ children }) => {
                     cart: debouncedCart
                 }
             });
-        }
+        } catch { }
     }, 5000), []);
 
     useEffect(() => {
-        logCart(userId, cart);
-    }, [cart]);
+        if (userId) logCart(userId, cart);
+    }, [userId, cart]);
 
     useEffect(() => {
         localStorage.setItem("cart", JSON.stringify(cart));
