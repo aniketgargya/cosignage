@@ -1,9 +1,11 @@
 const express = require("express");
 const asyncHandler = require("express-async-handler");
 const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
-const { Cart } = require("../types");
-const { body } = require("express-validator");
+const { Cart, MongoObjectID } = require("../types");
+const { body, param } = require("express-validator");
 const { validate } = require("../middleware");
+const db = require("../db");
+const { ObjectID } = require("mongodb");
 
 const router = express.Router();
 
@@ -20,9 +22,23 @@ router.post("/cart",
     }
 );
 
-router.get("/product/:productId", () => {
+router.get("/products", asyncHandler(async (req, res) => {
+    const products = await db.items.find().toArray();
+    res.json({ products });
+}));
 
-});
+router.get("/products/:_id",
+    [
+        param("_id").custom(productId => MongoObjectID.guard(productId)).withMessage({ status: 400, message: "Invalid Product ID" }).bail()
+            .customSanitizer(productId => ObjectID(productId))
+    ],
+    validate,
+    asyncHandler(async (req, res) => {
+        const { _id } = req.params;
+        const product = await db.items.findOne({ _id });
+        res.json({ product });
+    })
+);
 
 router.post("/checkout-session",
     [

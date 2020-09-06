@@ -52,4 +52,4 @@ const Cart = {
     }
 };
 
-module.exports = { UserId, Cart, String };
+module.exports = { UserId, Cart, String, MongoObjectID };
