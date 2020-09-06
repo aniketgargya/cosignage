@@ -2,6 +2,7 @@ import style from "../styles/pages/contact.css";
 import { Formik, Field, Form } from "formik";
 import axios from "axios";
 import { TextField, CustomButtom, Message } from "../components";
+import { axiosError } from "../functions";
 
 const Contact = () => {
     return (
@@ -33,29 +34,10 @@ const Contact = () => {
 
                                 setStatus({ success: true, message: "Message has been sent" });
                             } catch (e) {
-                                if (e) {
-                                    if (e.response.status === 400) {
-                                        setStatus({
-                                            success: false,
-                                            message: e.response.data.message || "An unknown error occurred"
-                                        });
-                                    } else if (e.response.status === 500) {
-                                        setStatus({
-                                            success: false,
-                                            message: `An error occurred on the server ${e.response.data.errorCode}`
-                                        });
-                                    } else {
-                                        setStatus({
-                                            success: false,
-                                            message: "An unknown error occurred"
-                                        });
-                                    }
-                                } else {
-                                    setStatus({
-                                        success: false,
-                                        message: "An error occurred trying to communicate with the server"
-                                    });
-                                }
+                                setStatus({
+                                    success: false,
+                                    message: axiosError(e)
+                                });
                             }
                         }}
                     >
