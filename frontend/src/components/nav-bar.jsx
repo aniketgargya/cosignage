@@ -26,9 +26,24 @@ const NavBar = () => {
                 </div>
 
                 <ul className="links" ref={links}>
-                    <Link href="/why-cosignage"><a>Why Cosignage?</a></Link>
-                    <Link href="/order"><a>Order</a></Link>
-                    <Link href="/contact"><a>Contact</a></Link>
+                    {
+                        [
+                            {
+                                href: "/why-cosignage",
+                                a: "Why Cosignage?"
+                            },
+                            {
+                                href: "/order",
+                                a: "Order"
+                            },
+                            {
+                                href: "/contact",
+                                a: "Contact"
+                            }
+                        ].map(({ href, a }, i) => (
+                            <Link key={i} href={href}><a onClick={() => setSidebarOpen(false)}>{a}</a></Link>
+                        ))
+                    }
                 </ul>
 
                 <Link href="/my-cart"><a><img className="shopping-cart" src="/img/icon/shopping-cart.png" /></a></Link>
