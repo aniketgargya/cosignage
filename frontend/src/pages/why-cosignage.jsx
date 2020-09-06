@@ -1,6 +1,6 @@
 import style from "../styles/pages/why-cosignage.css";
 
-const Index = () => {
+const WhyCosignage = () => {
     return (
         <>
             <style jsx>{style}</style>
@@ -18,4 +18,4 @@ const Index = () => {
     );
 };
 
-export default Index;
+export default WhyCosignage;

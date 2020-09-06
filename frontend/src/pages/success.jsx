@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 
-const Checkout = () => {
+const Success = () => {
     useEffect(() => {
         localStorage.setItem("cart", JSON.stringify({}));
     });
@@ -8,4 +8,4 @@ const Checkout = () => {
     return <p>You've successfully purchased your items!</p>;
 };
 
-export default Checkout;
+export default Success;
