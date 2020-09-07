@@ -1,0 +1,28 @@
+main {
+    min-height: 30vw;
+    position: relative;
+}
+
+.sign {
+    margin: 50px 100px;
+
+    display: flex;
+    flex-direction: row;
+}
+
+.sign img {
+    width: 20%;
+}
+
+.sign .majority {
+    width: 60%;
+    margin-right: 20%;
+}
+
+.sign h1 {
+    margin-bottom: 20px;
+}
+
+.quantity-section {
+    margin: 50px 100px;
+}

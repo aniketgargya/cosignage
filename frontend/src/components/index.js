@@ -5,3 +5,4 @@ export * from "./text-field";
 export * from "./custom-button";
 export * from "./message";
 export * from "./loader";
+export * from "./number-field";

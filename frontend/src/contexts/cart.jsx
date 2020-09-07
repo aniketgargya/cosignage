@@ -5,12 +5,14 @@ import { useUser } from ".";
 
 const CartContext = createContext({
     cart: [],
-    setCart: () => { }
+    setCart: () => { },
+    setCartItemQuantity: () => { },
+    getCartItemQuantity: () => { }
 });
 
 const CartProvider = ({ children }) => {
     const { userId } = useUser();
-    const [cart, setCart] = useState([]);
+    const [cart, setCart] = useState({});
 
     const retrieveCart = async () => {
         try {
@@ -21,10 +23,29 @@ const CartProvider = ({ children }) => {
                 url: "/api/p/cart",
                 data: { cart }
             });
+
+            setCart(cart);
         } catch {
-            setCart([]);
+            setCart({});
         }
     };
+
+    const getCartItemQuantity = useCallback((productId, variationId) => {
+        if (cart[productId] === undefined) return 0;
+        if (cart[productId][variationId] == undefined) return 0;
+        return cart[productId][variationId];
+    }, [cart]);
+
+    const setCartItemQuantity = useCallback((productId, variationId, quantity) => {
+        setCart(c => {
+            const n = {
+                ...c
+            };
+            if (n[productId] === undefined) n[productId] = {};
+            n[productId][variationId] = quantity;
+            return n;
+        });
+    }, [setCart]);
 
     useEffect(() => {
         retrieveCart();
@@ -52,7 +73,7 @@ const CartProvider = ({ children }) => {
     }, [cart]);
 
     return (
-        <CartContext.Provider value={{ cart, setCart }}>
+        <CartContext.Provider value={{ cart, setCart, setCartItemQuantity, getCartItemQuantity }}>
             {children}
         </CartContext.Provider>
     );

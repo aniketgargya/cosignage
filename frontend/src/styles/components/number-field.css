@@ -1,0 +1,19 @@
+.quantity {
+    display: flex;
+    width: 160px;
+ }
+ 
+input, .quantity button {
+    width:50px;
+    padding:.5em;
+    font-size:1.2rem;
+    text-align:center;
+    font-weight:900;
+    background:white;
+    border:1px solid #aaa;
+}
+ 
+.quantity input {
+    border-left: none;
+    border-right: none;
+}

@@ -1,7 +1,7 @@
 import style from "../styles/pages/contact.css";
 import { Formik, Field, Form } from "formik";
 import axios from "axios";
-import { TextField, CustomButtom, Message } from "../components";
+import { TextField, CustomButton, Message } from "../components";
 import { axiosError } from "../functions";
 
 const Contact = () => {
@@ -47,7 +47,7 @@ const Contact = () => {
                                 <Field type="text" name="businessName" label="Business Name" placeholder="Business Name" as={TextField} />
                                 <Field type="text" name="email" label="Email" placeholder="Email" as={TextField} />
                                 <Field type="text" name="message" label="Message" placeholder="Message" as={TextField} />
-                                <Field type="submit" value="Submit" disabled={isSubmitting} as={CustomButtom} />
+                                <Field type="submit" value="Submit" disabled={isSubmitting} as={CustomButton} />
                                 {status && <Message {...status} />}
                             </Form>
                         )}

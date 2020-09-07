@@ -1,6 +1,6 @@
 import styles from "../styles/components/custom-button.css";
 
-const CustomButtom = ({ value, ...otherProps }) => (
+const CustomButton = ({ value, ...otherProps }) => (
     <>
         <style jsx>{styles}</style>
 
@@ -8,4 +8,4 @@ const CustomButtom = ({ value, ...otherProps }) => (
     </>
 );
 
-export { CustomButtom };
+export { CustomButton };
