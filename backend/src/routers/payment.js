@@ -24,6 +24,21 @@ router.post("/cart",
 
 router.get("/products", asyncHandler(async (req, res) => {
     const products = await db.items.find().toArray();
+    products.forEach(product => {
+        const totalStock = product.variations.reduce((a, b) => a + b.stock, 0);
+
+        if (totalStock > 10) {
+            product.stockStatus = "In Stock";
+        } else if (totalStock > 0) {
+            product.stockStatus = "Low Stock";
+        } else {
+            product.stockStatus = "Out of Stock";
+        }
+
+        product.startingPrice = product.variations.reduce((a, b) => a > b.price ? b.price : a, product.variations[0].price);
+
+        delete product.variations;
+    });
     res.json({ products });
 }));
 
