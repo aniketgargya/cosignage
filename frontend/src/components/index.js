@@ -4,3 +4,4 @@ export * from "./custom-footer";
 export * from "./text-field";
 export * from "./custom-button";
 export * from "./message";
+export * from "./loader";

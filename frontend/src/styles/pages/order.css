@@ -1,0 +1,86 @@
+main {
+    padding: 50px 100px;
+}
+
+main header {
+    margin-bottom: 20px;
+}
+
+.signs-container {
+    margin-top: 50px;
+    position: relative;
+    min-height: 40vh;
+}
+
+.sign-container {
+    display: grid;
+    grid-template-columns: min-content max-content 1fr;
+    grid-template-rows: 1fr 1fr;
+    column-gap: 30px;
+    grid-template-areas:
+        "image name price"
+        "image stock .";
+}
+
+.sign-container:not(:last-child) {
+    padding-bottom: 50px;
+    margin-bottom: 50px;
+    border-bottom: 1px var(--color-gray-dark-1) solid;
+}
+
+.sign-container img {
+    width: 250px;
+    height: 250px;
+    grid-area: image;
+}
+
+.sign-container .sign-name {
+    align-self: end;
+    text-decoration: none;
+    grid-area: name;
+}
+
+.sign-container .stock-status {
+    grid-area: stock;
+    font-size: 18px;
+}
+
+.sign-container .starting-price {
+    grid-area: price;
+    font-size: 25px;
+    justify-self: end;
+    align-self: end;
+}
+
+@media only screen and (max-width: 1000px) {
+    main {
+        padding: 50px 50px;
+    }
+    .sign-container img {
+        width: 150px;
+        height: 150px;
+    }
+}
+
+@media only screen and (max-width: 700px) {
+    .sign-container {
+        grid-template-columns: 1fr;
+        grid-template-rows: repeat(4, min-content);
+        grid-template-areas:
+            "image"
+            "name"
+            "stock"
+            "price";
+        justify-items: center;
+        row-gap: 5px;
+    }
+
+    .sign-container .starting-price {
+        justify-self: auto;
+    }
+
+    .sign-container img {
+        width: 150px;
+        height: 150px;
+    }
+}
