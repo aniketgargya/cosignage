@@ -30,11 +30,11 @@ const CartProvider = ({ children }) => {
         }
     };
 
-    const getCartItemQuantity = useCallback((productId, variationId) => {
-        if (cart[productId] === undefined) return 0;
-        if (cart[productId][variationId] == undefined) return 0;
-        return cart[productId][variationId];
-    }, [cart]);
+    const getCartItemQuantity = useCallback((cartValue, productId, variationId) => {
+        if (cartValue[productId] === undefined) return 0;
+        if (cartValue[productId][variationId] == undefined) return 0;
+        return cartValue[productId][variationId];
+    }, []);
 
     const setCartItemQuantity = useCallback((productId, variationId, quantity) => {
         setCart(c => {

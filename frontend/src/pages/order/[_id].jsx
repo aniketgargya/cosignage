@@ -9,7 +9,7 @@ import { useCart } from "../../contexts";
 
 const OrderId = () => {
     const router = useRouter();
-    const { getCartItemQuantity, setCartItemQuantity } = useCart();
+    const { cart, getCartItemQuantity, setCartItemQuantity } = useCart();
     const { _id } = router.query;
 
     const { data, isLoading, error, isFetching, refetch } = useQuery(null, async () => {
@@ -53,7 +53,7 @@ const OrderId = () => {
                                                     key={i}
                                                     min={0}
                                                     max={variation.stock}
-                                                    value={getCartItemQuantity(_id, variation.variationId)}
+                                                    value={getCartItemQuantity(cart, _id, variation.variationId)}
                                                     onChange={newQuantity => setCartItemQuantity(_id, variation.variationId, newQuantity)}
                                                 />
                                             ))}
