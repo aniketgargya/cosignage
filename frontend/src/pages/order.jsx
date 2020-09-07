@@ -6,7 +6,7 @@ import { axiosError } from "../functions";
 import Link from "next/link";
 
 const Order = () => {
-    const { data, isLoading, isError, error } = useQuery("products", async () => {
+    const { data, isLoading, error } = useQuery("products", async () => {
         await new Promise(resolve => setTimeout(resolve, 3000));
         const { data } = await axios({
             method: "GET",
