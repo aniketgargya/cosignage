@@ -11,28 +11,48 @@ footer .footer-mid {
     align-items: center;
 }
 
-footer img {
+footer img.logo {
     width: 100px;
     height: 100px;
 }
 
-footer a {
+footer .contact-us .email, footer .contact-us .phone {
+    padding: 12px 0;
+}
+
+footer .contact-us a {
     color: var(--color-gray-dark-2);
     font-size: 18px;
 }
 
 footer .title {
     color: var(--color-primary);
-    font-size: 35px;
+    font-size: 28px;
+}
+
+footer .social-links {
+    margin: 0 auto;
+    margin-top: 30px;
+
+    display: flex;
+    justify-content: center;
+}
+
+footer .social-links img {
+    width: 35px;
+}
+
+footer .social-links a:not(:last-child) {
+    margin-right: 60px;
 }
 
 footer .copyright {
-    margin-top: 25px;
+    margin-top: 30px;
     text-align: center;
     font-size: 20px;
 }
 
-@media only screen and (max-width: 600px) {
+@media only screen and (max-width: 800px) {
     footer {
         padding: 50px 20px;
     }
@@ -43,11 +63,15 @@ footer .copyright {
     }
 
     footer .title {
-        font-size: 30px;
+        font-size: 22px;
     }
 
-    footer img {
+    footer img.logo {
         margin-bottom: 30px;
+    }
+
+    footer .social-links img {
+        width: 30px;
     }
 
     footer .copyright {

@@ -6,14 +6,19 @@ const CustomFooter = () => (
 
         <footer>
             <div className="footer-mid">
-                <div>
+                <div className="contact-us">
                     <div className="title">Contact Us</div>
                     <div className="email"><a href="mailto:contact@cosignage.info">contact@cosignage.info</a></div>
                     <div className="phone"><a href="tel:2176737346">(217)-673-7346</a></div>
                 </div>
-                <img src="/img/signs/mask-required.png" />
+                <img className="logo" src="/img/signs/mask-required.png" alt="Cosignage Logo" />
             </div>
-            <p className="copyright">Copyright &copy; 2020 Cosignage. All rights reserved.</p>
+            <div className="social-links">
+                <a href="https://www.facebook.com/cosignage"><img src="/img/icon/social-media/facebook.svg" alt="Facebook Logo" /></a>
+                <a href="https://twitter.com/cosignage_"><img src="/img/icon/social-media/twitter.svg" alt="Twitter Logo" /></a>
+                <a href="https://www.instagram.com/cosignage/"><img src="/img/icon/social-media/instagram.svg" alt="Instagram Logo" /></a>
+            </div>
+            <p className="copyright">&copy; 2020 Cosignage, LLC. All Rights Reserved.</p>
         </footer>
     </>
 );
