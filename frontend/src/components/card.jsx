@@ -5,7 +5,7 @@ const Card = ({ iconUrl, title, description }) => (
         <style jsx>{styles}</style>
 
         <div className="card">
-            <img src={iconUrl} />
+            <img src={iconUrl} alt={description} />
             <span className="title">{title}</span>
             <span className="description">{description}</span>
         </div >

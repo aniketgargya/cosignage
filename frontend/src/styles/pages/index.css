@@ -7,10 +7,13 @@ header {
     display: flex;
 }
 
-header .hero-image {
+header .hero-picture {
     width: 50%;
     align-self: center;
-    content: url("/img/big/hero2-vertical.jpg");
+}
+
+header .hero-image {
+    width: 100%;
 }
 
 header .text {
@@ -82,9 +85,8 @@ header .text h1 {
         flex-direction: column;
     }
 
-    header .hero-image {
+    header .hero-picture {
         width: 100%;
-        content: url("/img/big/hero2-horizontal.jpg");
     }
 
     header .text {
