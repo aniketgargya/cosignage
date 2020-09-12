@@ -20,7 +20,7 @@ const NavBar = () => {
                 <div className="logo-container">
                     <Link href="/">
                         <a>
-                            <img className="logo" src="/img/icon/logo.png" />
+                            <img className="logo" src="/img/icon/themed/logo.png" alt="Cosignage Logo" />
                         </a>
                     </Link>
                 </div>
@@ -42,6 +42,7 @@ const NavBar = () => {
                             }
                         ].map(({ href, a }, i) => (
                             <Link key={i} href={href}><a onClick={() => setSidebarOpen(false)}>{a}</a></Link>
+                            <li key={i}><Link href={href}><a onClick={() => setSidebarOpen(false)}>{a}</a></Link></li>
                         ))
                     }
                 </ul>

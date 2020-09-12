@@ -23,7 +23,7 @@ nav {
     display: flex;
 }
 
-.links li:not(:last-child) {
+.links li {
     margin-right: 30px;
 }
 

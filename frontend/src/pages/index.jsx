@@ -31,17 +31,17 @@ const Index = () => {
             <section className="cards-container">
                 <div className="cards">
                     <Card
-                        iconUrl="/img/icon/world.svg#world"
+                        iconUrl="/img/icon/card/world.svg#world"
                         title="Recognizable"
                         description="Visible from afar and universally uniform."
                     />
                     <Card
-                        iconUrl="/img/icon/pencil.svg#pencil"
+                        iconUrl="/img/icon/card/pencil.svg#pencil"
                         title="Customizable"
                         description="Choose from six visuals and a variety of sizes to meet your business' specific needs."
                     />
                     <Card
-                        iconUrl="/img/icon/dollar.svg#dollar"
+                        iconUrl="/img/icon/card/dollar.svg#dollar"
                         title="Affordable"
                         description="Accessible to all business of all sizes."
                     />

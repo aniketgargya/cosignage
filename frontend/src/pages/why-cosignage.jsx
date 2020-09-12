@@ -6,6 +6,7 @@ const WhyCosignage = () => (
         <style jsx>{style}</style>
         <Head>
             <title>Why Cosignage</title>
+            <meta name="description" content="Why Cosignage? Cosignage is a set of Coronavirus-communication signage meant to ease your business’ communication during the coronavirus pandemic." />
         </Head>
 
         <main>

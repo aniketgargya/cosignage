@@ -11,7 +11,7 @@ const CustomFooter = () => (
                     <div className="email"><a href="mailto:contact@cosignage.info">contact@cosignage.info</a></div>
                     <div className="phone"><a href="tel:2176737346">(217)-673-7346</a></div>
                 </div>
-                <img className="logo" src="/img/signs/mask-required.png" alt="Cosignage Logo" />
+                <img className="logo" src="/img/icon/themed/logo-two.png" alt="Cosignage Logo" />
             </div>
             <div className="social-links">
                 <a href="https://www.facebook.com/cosignage"><img src="/img/icon/social-media/facebook.svg" alt="Facebook Logo" /></a>
