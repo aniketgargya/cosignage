@@ -3,11 +3,16 @@ import { Formik, Field, Form } from "formik";
 import axios from "axios";
 import { TextField, CustomButton, Message } from "../components";
 import { axiosError } from "../functions";
+import Head from "next/head";
 
 const Contact = () => {
     return (
         <>
             <style jsx>{style}</style>
+            <Head>
+                <title>Contact Cosignage</title>
+                <meta name="description" content="Contact Cosignage to ease your business’ communication during the coronavirus pandemic." />
+            </Head>
 
             <main>
                 <h1>Need to contact us?</h1>
@@ -43,10 +48,10 @@ const Contact = () => {
                     >
                         {({ isSubmitting, status }) => (
                             <Form className="contact-form">
-                                <Field type="text" name="name" label="Name" placeholder="Name" as={TextField} />
-                                <Field type="text" name="businessName" label="Business Name" placeholder="Business Name" as={TextField} />
-                                <Field type="text" name="email" label="Email" placeholder="Email" as={TextField} />
-                                <Field type="text" name="message" label="Message" placeholder="Message" as={TextField} />
+                                <Field type="text" name="name" label="Name" placeholder="Name" id="name" as={TextField} />
+                                <Field type="text" name="businessName" label="Business Name" placeholder="Business Name (Optional)" id="business-name" as={TextField} />
+                                <Field type="text" name="email" label="Email" placeholder="Email" id="email" as={TextField} />
+                                <Field type="text" name="message" label="Message" placeholder="Message" id="message" as={TextField} />
                                 <Field type="submit" value="Submit" disabled={isSubmitting} as={CustomButton} />
                                 {status && <Message {...status} />}
                             </Form>
