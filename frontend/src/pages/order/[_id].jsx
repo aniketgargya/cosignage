@@ -5,6 +5,7 @@ import style from "../../styles/pages/order/[_id].css";
 import { useEffect, useState } from "react";
 import { useCart } from "../../contexts";
 import { axiosError } from "../../functions";
+import Head from "next/head";
 
 const OrderId = ({ _id, data, error }) => {
     const { cart, getCartItemQuantity, setCartItemQuantity } = useCart();
@@ -34,8 +35,19 @@ const OrderId = ({ _id, data, error }) => {
 
             <main>
                 <>
-                    {error ? <Message message={axiosError(error)} /> : (
+                    {error ? (
                         <>
+                            <Head>
+                                <title>Order | cosignage.info</title>
+                            </Head>
+                            <Message message={axiosError(error)} />
+                        </>
+                        ) : (
+                        <>
+                            <Head>
+                                <title>Order {data.product.name} | cosignage.info</title>
+                            </Head>
+
                             <div className="sign">
                                 <div className="rest">
                                     <h1>{data.product.name}</h1>
