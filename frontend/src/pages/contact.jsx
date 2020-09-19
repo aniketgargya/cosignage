@@ -61,8 +61,8 @@ const Contact = () => {
                         <h3>Working Hours</h3>
                         <p>9AM - 4PM, Mon to Fri</p>
                         <h3>Contact</h3>
-                        <p>contact@cosignage.info</p>
-                        <p>Phone: (217)-673-7346</p>
+                        <p><a href="mailto:contact@cosignage.info">contact@cosignage.info</a></p>
+                        <p><a href="tel:2176737346">(217)-673-7346</a></p>
                     </div>
                 </div>
             </main>
