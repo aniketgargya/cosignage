@@ -7,7 +7,7 @@ const NumberField = ({ onChange, value, min, max }) => {
 
             <div className="quantity">
                 <button className="minus" onClick={() => onChange(value - 1)} disabled={value <= min}>-</button>
-                <input type="number" value={value} readOnly />
+                <span type="number">{value}</span>
                 <button className="plus" onClick={() => onChange(value + 1)} disabled={value >= max}>+</button>
             </div>
         </>
