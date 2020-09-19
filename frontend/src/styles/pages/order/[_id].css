@@ -40,6 +40,19 @@ select {
     margin: 20px 50px 20px 0;
 }
 
+.sign .select-input-bottom {
+    margin-top: 10px;
+}
+
+.sign .select-input-bottom  {
+    display: flex;
+    align-items: center;
+}
+
+:global(.sign .select-input-bottom button) {
+    margin-right: auto;
+}
+
 @media only screen and (max-width: 1200px) {
     .sign .display .main-img {
         width: 300px;

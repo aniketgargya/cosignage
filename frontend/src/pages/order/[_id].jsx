@@ -60,11 +60,14 @@ const OrderId = ({ _id, data, error }) => {
                                                 }}
                                             />
                                         </div>
-                                        <CustomButton
-                                            value="Add To Cart"
-                                            disabled={getCartItemQuantity(cart, _id, currentVariationId) == temporaryCart[currentVariationId]}
-                                            onClick={() => setCartItemQuantity(_id, currentVariationId, temporaryCart[currentVariationId])}
-                                        />
+                                        <div className="select-input-bottom">
+                                            <CustomButton
+                                                value="Update Cart"
+                                                disabled={getCartItemQuantity(cart, _id, currentVariationId) == temporaryCart[currentVariationId]}
+                                                onClick={() => setCartItemQuantity(_id, currentVariationId, temporaryCart[currentVariationId])}
+                                            />
+                                            <h3>${(temporaryCart[currentVariationId] * data.product.variations.find(({variationId}) => variationId == currentVariationId).price).toFixed(2)}</h3>
+                                        </div>
                                     </div>
                                 </div>
                                 <div className="display">
