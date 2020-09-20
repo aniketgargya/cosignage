@@ -5,7 +5,7 @@ const db = require("../db");
 
 const UserId = String.withConstraint(s => validate(s) && version(s) === 1);
 
-const WholeNumber = Number.withConstraint(n => n >= 0);
+const WholeNumber = Number.withConstraint(n => n > 0);
 
 const MongoObjectID = String.withConstraint(s => isValidObjectID(s));
 

@@ -48,6 +48,30 @@ const CartProvider = ({ children }) => {
     }, [setCart]);
 
     useEffect(() => {
+        if (
+            Object.keys(cart).some(cartItem => Object.keys(cart[cartItem]).some(variationId => cart[cartItem][variationId] === 0)) ||
+            Object.keys(cart).some(cartItem => Object.keys(cart[cartItem]).length === 0)
+        ) {
+            const c = {
+                ...cart
+            };
+
+            Object.keys(cart)
+                .forEach(cartItem => {
+                    Object.keys(cart[cartItem])
+                        .filter(variationId => cart[cartItem][variationId] === 0)
+                        .forEach(variationId => { delete cart[cartItem][variationId] });
+                });
+
+            Object.keys(cart)
+                .filter(cartItem => Object.keys(cart[cartItem]).length === 0)
+                .forEach(cartItem => { delete c[cartItem] });
+            
+            setCart(c);
+        }
+    }, [cart]);
+
+    useEffect(() => {
         retrieveCart();
     }, []);
 
