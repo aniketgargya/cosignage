@@ -4,7 +4,7 @@ const TextField = ({ label, id, ...otherProps }) => (
     <>
         <style jsx>{styles}</style>
 
-        <label for={id}>{label}</label>
+        <label htmlFor={id}>{label}</label>
         <input className="text-field" type="text" id={id} {...otherProps} />
     </>
 );
