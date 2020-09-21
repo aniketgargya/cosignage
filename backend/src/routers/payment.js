@@ -67,25 +67,49 @@ router.post("/checkout-session",
     ],
     validate,
     asyncHandler(async (req, res) => {
-        const { userId, ipInfo, cart, name, street, lineTwo, city, state, zip, country } = req.body;
+        const { userId, cart, name, street, lineTwo, city, state, zip, country } = req.body;
+
+        const line_items = [];
+
+        for (const cartItemId in cart) {
+            const cartItemData = await db.items.findOne({ _id: ObjectID(cartItemId) });
+
+            for (const variationId in cart[cartItemId]) {
+                const [variationData] = cartItemData.variations.filter(variation => variation.variationId === variationId);
+
+                line_items.push({
+                    price_data: {
+                        currency: "usd",
+                        product_data: {
+                            name: `${cartItemData.name} - ${variationData.name}`
+                        },
+                        unit_amount: variationData.price * 100
+                    },
+                    quantity: cart[cartItemId][variationId]
+                });
+            }
+        }
+
+        const tax = Math.ceil(line_items.reduce((t, variation) => t + variation.price_data.unit_amount * variation.quantity, 0) * 0.0625);
+        line_items.push({
+            price_data: {
+                currency: "usd",
+                product_data: {
+                    name: "Tax"
+                },
+                unit_amount: tax
+            },
+            quantity: 1
+        });
 
         const { id } = await stripe.checkout.sessions.create({
             payment_method_types: ["card"],
-            line_items: Object.keys(cart).map(cartItemId => ({
-                price_data: {
-                    currency: "usd",
-                    product_data: {
-                        name: cartData[cartItemId].name
-                    },
-                    unit_amount: cartData[cartItemId].price
-                },
-                quantity: cart[cartItemId]
-            })),
+            line_items,
             mode: "payment",
             success_url: `http://${process.env.DOMAIN}/success`,
             cancel_url: `http://${process.env.DOMAIN}/checkout`,
             payment_intent_data: {
-                metadata: { userId, ipInfo, name, street, lineTwo, city, state, zip, country }
+                metadata: { userId, name, street, lineTwo, city, state, zip, country }
             }
         });
 
