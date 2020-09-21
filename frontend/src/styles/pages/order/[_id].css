@@ -6,6 +6,7 @@ main {
 
 .sign {
     display: flex;
+    justify-content: space-between;
 }
 
 .sign .rest {
