@@ -21,7 +21,7 @@ const MyCart = () => {
         retry: false
     });
 
-    const total = Object.keys(cart).reduce((i, cartItemId) => {
+    const total = !data ? 0 : Object.keys(cart).reduce((i, cartItemId) => {
         const [product] = data.products.filter(({ _id }) => cartItemId == _id);
         const totalPrice = Object.keys(cart[cartItemId]).reduce((t, variationId) => {
             const [{ price }] = product.variations.filter(variation => variation.variationId === variationId);
