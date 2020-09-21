@@ -36,8 +36,6 @@ router.get("/products", asyncHandler(async (req, res) => {
         }
 
         product.startingPrice = product.variations.reduce((a, b) => a > b.price ? b.price : a, product.variations[0].price);
-
-        delete product.variations;
     });
     res.json({ products });
 }));

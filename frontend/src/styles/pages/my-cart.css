@@ -1,0 +1,127 @@
+main {
+    padding: 50px 100px;
+    min-height: 80vh;
+}
+
+.full {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+h1 {
+    margin-bottom: 20px;
+}
+
+.detailed {
+    width: 60%;
+}
+
+.detailed .product {
+    margin: 50px 0;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+}
+
+.detailed .product img {
+    width: 250px;
+    margin-right: 40px;
+}
+
+.detailed .product .text {
+    margin-top: 10px;
+}
+
+.detailed .product .product-name-link {
+    text-decoration-color: var(--color-gray-dark-2);
+}
+
+.detailed .product .description {
+    margin-bottom: 10px;
+}
+
+.detailed .product .variation:not(:last-child) {
+    margin-bottom: 10px;
+}
+
+.detailed .product .variation .variation-name {
+    text-decoration: underline;
+}
+
+a:link, a:visited, a, a:hover {
+    text-decoration-color: currentColor;
+}
+
+.summary {
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.5);
+    background-color: var(--color-gray-light-2);
+    color: white;
+    width: 35%;
+    padding: 20px;
+    border-radius: 3px;
+}
+
+.summary .line {
+    display: flex;
+    justify-content: space-between;
+}
+
+.summary .line {
+    margin: 10px 0;
+}
+
+@media only screen and (max-width: 1400px) {
+    .detailed .product img {
+        width: 200px;
+    }
+}
+
+@media only screen and (max-width: 1250px) {
+    .full {
+        flex-direction: column-reverse;
+    }
+
+    .detailed {
+        width: 100%;
+    }
+
+    .summary {
+        width: 100%;
+        padding: 35px 50px;
+    }
+}
+
+@media only screen and (max-width: 1000px) {
+    main {
+        padding: 50px 50px;
+    }
+}
+
+@media only screen and (max-width: 700px) {
+    .summary {
+        padding: 20px;
+    }
+}
+
+@media only screen and (max-width: 600px) {
+    .detailed .product {
+        flex-direction: column;
+        /* text-align: center; */
+    }
+
+    .detailed .product img {
+        align-self: center;
+    }
+
+    .detailed .product h2 {
+        align-self: stretch;
+        text-align: center;
+    }
+}
+
+@media only screen and (max-width: 400px) {
+    .summary {
+        padding: 20px 10px;
+    }
+}
