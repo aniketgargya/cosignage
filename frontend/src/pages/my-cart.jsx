@@ -21,6 +21,18 @@ const MyCart = () => {
         retry: false
     });
 
+    const total = Object.keys(cart).reduce((i, cartItemId) => {
+        const [product] = data.products.filter(({ _id }) => cartItemId == _id);
+        const totalPrice = Object.keys(cart[cartItemId]).reduce((t, variationId) => {
+            const [{ price }] = product.variations.filter(variation => variation.variationId === variationId);
+            return t + price * cart[cartItemId][variationId];
+        }, 0);
+        return i + totalPrice;
+    }, 0);
+
+    const tax = (total * 0.0625);
+    const grandTotal = total + tax;
+
     return (
         <>
             <style jsx>{style}</style>
@@ -81,6 +93,14 @@ const MyCart = () => {
                                             </div>
                                         );
                                     })}
+                                    <div className="line">
+                                        <p>Tax (6.25%)</p>
+                                        <p>${tax.toFixed(2)}</p>
+                                    </div>
+                                    <div className="line final">
+                                        <p>Total</p>
+                                        <p>${grandTotal.toFixed(2)}</p>
+                                    </div>
                                     <Link href="/checkout"><a>
                                         <CustomButton value="Checkout" />
                                     </a></Link>

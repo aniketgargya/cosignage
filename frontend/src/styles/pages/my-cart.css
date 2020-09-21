@@ -71,6 +71,11 @@ a:link, a:visited, a, a:hover {
     margin: 10px 0;
 }
 
+.summary .final > * {
+    font-weight: 700;
+    font-size: 1.2em;
+}
+
 @media only screen and (max-width: 1400px) {
     .detailed .product img {
         width: 200px;
