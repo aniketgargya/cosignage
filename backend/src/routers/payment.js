@@ -62,7 +62,7 @@ router.post("/checkout-session",
         body("city").isLength({ min: 1 }).withMessage({ status: 400, message: "City cannot be empty" }),
         body("state").isLength({ min: 1 }).withMessage({ status: 400, message: "State/Province/Region cannot be empty" }),
         body("zip").isLength({ min: 1 }).withMessage({ status: 400, message: "ZIP/Postal Code cannot be empty" })
-            .custom(zip => ["61874", "00000"].includes(zip)).withMessage({ status: 400, message: "Sorry, we do not deliever to that location yet" }),
+            .custom(zip => ["61820", "61821", "61821", "61824", "61825", "61826", "61801", "61802", "61803"].includes(zip)).withMessage({ status: 400, message: "Sorry, we do not deliever to that location yet" }),
         body("country").isLength({ min: 1 }).withMessage({ status: 400, message: "Country cannot be empty" })
     ],
     validate,
@@ -107,7 +107,7 @@ router.post("/checkout-session",
             line_items,
             mode: "payment",
             success_url: `http://${process.env.DOMAIN}/success`,
-            cancel_url: `http://${process.env.DOMAIN}/checkout`,
+            cancel_url: `http://${process.env.DOMAIN}/`,
             payment_intent_data: {
                 metadata: { userId, name, street, lineTwo, city, state, zip, country }
             }
