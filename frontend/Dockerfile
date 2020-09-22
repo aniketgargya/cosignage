@@ -8,6 +8,8 @@ RUN npm install
 
 COPY . .
 
+ARG NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY
+
 RUN npm run build
 
 EXPOSE 3000
