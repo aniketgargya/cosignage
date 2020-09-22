@@ -76,9 +76,8 @@ const Checkout = () => {
                                 <Field type="text" name="street" placeholder="Street Address" label="Street Address" id="street-address" as={TextField} />
                                 <Field type="text" name="lineTwo" placeholder="Street Address Line Two" label="Street Address Line Two" id="street-address-line-two" as={TextField} />
                                 <Field type="text" name="city" placeholder="City" label="City" id="city" as={TextField} />
-                                <Field type="text" name="state" placeholder="State / Province / Region" label="City" id="city" as={TextField} />
+                                <Field type="text" name="state" placeholder="State / Province / Region" label="State / Province / Region" id="city" as={TextField} />
                                 <Field type="text" name="zip" placeholder="ZIP Code" label="ZIP Code" id="zip" as={TextField} />
-                                <Field type="text" name="country" placeholder="Country" label="County" id="country" as={TextField} />
                                 <Field type="submit" value="Proceed to Payment" disabled={isSubmitting} as={CustomButton} />
                                 {status && <Message {...status} />}
                             </Form>
