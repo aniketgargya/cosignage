@@ -53,7 +53,7 @@ const NavBar = () => {
                 </ul>
 
                 <Link href="/my-cart"><a className="shopping-section">
-                    <img className="shopping-cart" src="/img/icon/themed/shopping-cart.png" />
+                    <img className="shopping-cart" alt="Shopping Cart Icon" src="/img/icon/themed/shopping-cart.png" />
                     <span className="shopping-total">{cartTotal}</span>
                 </a></Link>
 
