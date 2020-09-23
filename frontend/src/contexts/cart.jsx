@@ -18,13 +18,17 @@ const CartProvider = ({ children }) => {
         try {
             const cart = JSON.parse(localStorage.getItem("cart"));
 
-            await axios({
-                method: "POST",
-                url: "/api/p/cart",
-                data: { cart }
-            });
+            if (cart) {
+                await axios({
+                    method: "POST",
+                    url: "/api/p/cart",
+                    data: { cart }
+                });
 
-            setCart(cart);
+                setCart(cart);
+            } else {
+                setCart({});
+            }
         } catch {
             setCart({});
         }
