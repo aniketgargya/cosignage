@@ -31,8 +31,8 @@ const Order = () => {
                     <h1>Customizable Signage to Fit Your Business' Needs</h1>
                     <p>Cosignage is available in a variety of materials and sizes to best suit your business. Choose from six designs or submit your own custom request.</p>
                 </header>
+                {error ? <Message message={axiosError(error)} /> : null}
                 <div className="signs-container">
-                    {error ? <Message message={axiosError(error)} /> : null}
                     {isLoading ? <Loader /> : (
                         <>
                             {data && data.products.map((product, i) => (
