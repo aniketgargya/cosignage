@@ -80,7 +80,14 @@ router.post("/checkout-session",
                     price_data: {
                         currency: "usd",
                         product_data: {
-                            name: `${cartItemData.name} - ${variationData.name}`
+                            name: `${cartItemData.name} - ${variationData.name}`,
+                            images: [
+                                `${process.env.DOMAIN}/img/signs/${cartItemData.imageName}.png`
+                            ],
+                            metadata: {
+                                cartItemId,
+                                variationId
+                            }
                         },
                         unit_amount: variationData.price * 100
                     },

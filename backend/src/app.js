@@ -1,7 +1,7 @@
 const express = require("express");
 const expressIp = require("express-ip");
 const db = require("./db");
-const { analyticsRouter, paymentRouter, otherRouter, adminRouter } = require("./routers");
+const { analyticsRouter, paymentRouter, otherRouter, adminRouter, stripeRouter } = require("./routers");
 const { v4 } = require("uuid");
 const createError = require("http-errors");
 
@@ -16,6 +16,7 @@ app.use("/a", analyticsRouter);
 app.use("/p", paymentRouter);
 app.use("/o", otherRouter);
 app.use("/s", adminRouter);
+app.use("/stripe", stripeRouter);
 
 app.use((req, res, next) => {
 	next(createError(404));
@@ -35,7 +36,7 @@ app.use((err, req, res, next) => {
 });
 
 const main = async () => {
-	await db.connect("mongodb://database:27017/", "cosignage", ["visits", "carts", "messages", "items"], {
+	await db.connect("mongodb://database:27017/", "cosignage", ["visits", "carts", "messages", "items", "purchases"], {
 		useUnifiedTopology: true,
 		useNewUrlParser: true,
 		poolSize: 50
