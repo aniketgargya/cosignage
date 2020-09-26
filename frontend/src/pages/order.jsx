@@ -32,9 +32,9 @@ const Order = () => {
                     <p>Cosignage is available in a variety of materials and sizes to best suit your business. Choose from six designs or submit your own custom request.</p>
                 </header>
                 <div className="signs-container">
+                    {error ? <Message message={axiosError(error)} /> : null}
                     {isLoading ? <Loader /> : (
                         <>
-                            {error ? <Message message={axiosError(error)} /> : null}
                             {data && data.products.map((product, i) => (
                                 <div key={i} className="sign-container">
                                     <img src={`/img/signs/${product.imageName}.png`} />
