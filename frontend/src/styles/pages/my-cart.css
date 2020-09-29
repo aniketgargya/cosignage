@@ -33,8 +33,18 @@ h1 {
     margin-top: 10px;
 }
 
-.detailed .product .product-name-link {
-    text-decoration-color: var(--color-gray-dark-2);
+.detailed .product .product-name {
+    display: flex;
+    align-items: center;
+}
+
+.detailed .product .product-name h2 {
+    margin-right: 10px;
+}
+
+.detailed .product .product-link {
+    width: 1.75em;
+    height: 1.75em;
 }
 
 .detailed .product .description {

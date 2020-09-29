@@ -56,7 +56,17 @@ const MyCart = () => {
                                             <div className="product" key={i}>
                                                 <img src={`/img/signs/${product.imageName}.png`} />
                                                 <div className="text">
-                                                    <Link href={`/order/${cartItemId}`}><a className="product-name-link"><h2>{product.name}</h2></a></Link>
+                                                    <div className="product-name">
+                                                        <h2>{product.name}</h2>
+                                                        <Link href={`/order/${cartItemId}`}><a>
+                                                            <svg className="product-link">
+                                                                <use
+                                                                    xlinkHref="/img/icon/my-cart/pencil.svg#pencil"
+                                                                ></use>
+                                                            </svg>
+                                                        </a></Link>
+                                                    </div>
+
                                                     <p className="description">{product.description}</p>
                                                     {Object.keys(cart[cartItemId]).map((variationId, i) => {
                                                         const [variation] = product.variations.filter(variation => variation.variationId == variationId);
