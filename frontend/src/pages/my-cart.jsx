@@ -8,7 +8,7 @@ import Head from "next/head";
 import Link from "next/link";
 
 const MyCart = () => {
-    const { cart } = useCart();
+    const { cart, setCartItemQuantity } = useCart();
 
     const { data, isLoading, error } = useQuery("products", async () => {
         await new Promise(resolve => setTimeout(resolve, 1000));
@@ -72,7 +72,17 @@ const MyCart = () => {
                                                         const [variation] = product.variations.filter(variation => variation.variationId == variationId);
                                                         return (
                                                             <div key={i} className="variation">
-                                                                <p className="variation-name">{variation.name}</p>
+                                                                <div className="variation-header">
+                                                                    <p className="variation-name">{variation.name}</p>
+                                                                    <svg
+                                                                        className="trash"
+                                                                        onClick={() => setCartItemQuantity(cartItemId, variationId, 0)}
+                                                                    >
+                                                                        <use
+                                                                            xlinkHref="/img/icon/my-cart/trash.svg#trash"
+                                                                        ></use>
+                                                                    </svg>
+                                                                </div>
                                                                 <p>Quantity: {cart[cartItemId][variationId]}</p>
                                                                 <p>Unit Price: ${variation.price}</p>
                                                             </div>
