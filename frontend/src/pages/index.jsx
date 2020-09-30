@@ -1,6 +1,7 @@
 import style from "../styles/pages/index.css";
-import { Card } from "../components/card";
+import { Card, CustomButton } from "../components";
 import Head from "next/head";
+import Link from "next/link";
 
 const Index = () => {
     return (
@@ -84,6 +85,10 @@ const Index = () => {
                             </div>
                         ))
                     }
+                </div>
+
+                <div className="cta-container">
+                    <Link href="/order"><CustomButton value="Order Now" /></Link>
                 </div>
             </section>
         </>

@@ -80,6 +80,11 @@ header .text h1 {
     margin-top: 20px;
 }
 
+.our-signs .cta-container {
+    margin-top: 50px;
+    text-align: center;
+}
+
 @media only screen and (max-width: 900px) {
     header {
         flex-direction: column;
