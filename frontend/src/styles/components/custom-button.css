@@ -9,11 +9,17 @@ button {
     transition: all .2s;
     cursor: pointer;
     outline: none;
+    box-shadow: 0 5px 5px rgba(0, 0, 0, .3);
+}
+
+button:hover {
+    box-shadow: 0 10px 5px rgba(0, 0, 0, .3);
 }
 
 button:disabled {
     background-color: var(--color-primary-dark);
     cursor: default;
+    box-shadow: none;
 }
 
 @media only screen and (max-width: 400px) {
