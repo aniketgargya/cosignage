@@ -4,8 +4,10 @@ import axios from "axios";
 import { TextField, CustomButton, Message } from "../components";
 import { axiosError } from "../functions";
 import Head from "next/head";
+import { useUser } from "../contexts";
 
 const Contact = () => {
+    const { userId } = useUser();
     return (
         <>
             <style jsx>{style}</style>
@@ -33,7 +35,8 @@ const Contact = () => {
                                     method: "POST",
                                     url: "/api/o/message",
                                     data: {
-                                        ...values
+                                        ...values,
+                                        userId
                                     }
                                 });
 
