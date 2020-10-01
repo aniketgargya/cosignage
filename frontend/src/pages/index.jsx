@@ -1,4 +1,3 @@
-import style from "../styles/pages/index.css";
 import { Card, CustomButton } from "../components";
 import Head from "next/head";
 import Link from "next/link";
@@ -6,7 +5,149 @@ import Link from "next/link";
 const Index = () => {
     return (
         <>
-            <style jsx>{style}</style>
+            <style jsx>{`
+                header {
+                    width: 100%;
+                    background-color: var(--color-gray-light-1);
+                    
+                    display: flex;
+                }
+
+                header .hero-picture {
+                    width: 50%;
+                    align-self: center;
+                }
+
+                header .hero-image {
+                    width: 100%;
+                }
+
+                header .text {
+                    flex: 1;
+                    padding: 30px 48px;
+                    text-align: right;
+
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: center;
+                }
+
+                header .text h1 {
+                    margin-bottom: 15px;
+                }
+
+                .cards-container {
+                    padding: 100px 0;
+                    background-color: var(--color-gray-light-2);
+                }
+
+                .cards {
+                    margin: 0 auto;
+                    width: 75%;
+                    max-width: 1000px;
+                    min-width: 800px;
+                    display: flex;
+                    justify-content: space-between;
+                }
+
+                .our-signs {
+                    padding: 100px 48px;
+                }
+
+                .our-signs h1 {
+                    text-align: center;
+                    margin-bottom: 50px;
+                }
+
+                .signs {
+                    max-width: 1300px;
+                    margin: 0 auto;
+
+                    display: grid;
+                    grid-template-columns: repeat(3, 1fr);
+                    row-gap: 75px;
+                    justify-items: center;
+                }
+
+                .signs .sign {
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                }
+
+                .signs .sign img {
+                    width: 200px;
+                }
+
+                .signs .sign span {
+                    text-align: center;
+                    font-size: 24px;
+                    color: var(--color-gray-dark-1);
+                    margin-top: 20px;
+                }
+
+                .our-signs .cta-container {
+                    margin-top: 50px;
+                    text-align: center;
+                }
+
+                @media only screen and (max-width: 900px) {
+                    header {
+                        flex-direction: column;
+                    }
+
+                    header .hero-picture {
+                        width: 100%;
+                    }
+
+                    header .text {
+                        text-align: left;
+                        padding-top: 60px;
+                        padding-bottom: 60px;
+                    }
+
+                    .cards-container {
+                        padding: 50px 0;
+                    }
+
+                    .cards {
+                        flex-direction: column;
+                        align-items: center;
+                        width: 100%;
+                        max-width: none;
+                        min-width: 0;
+                    }
+
+                    .cards > :global(*) {
+                        margin-bottom: 30px;
+                    }
+
+                    .signs {
+                        grid-template-columns: repeat(2, 1fr);
+                    }
+
+                    .signs .sign img {
+                        width: 150px;
+                    }
+                }
+
+                @media only screen and (max-width: 600px) {
+                    .our-signs {
+                        padding: 48px;
+                    }
+
+                    .signs {
+                        grid-template-columns: repeat(1, 1fr);
+                    }
+                }
+
+                @media only screen and (max-width: 550px) {
+                    header .text {
+                        padding-top: 30px;
+                        padding-bottom: 30px;
+                    }
+                }
+            `}</style>
 
             <Head>
                 <title>Cosignage</title>

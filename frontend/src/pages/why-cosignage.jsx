@@ -1,9 +1,31 @@
-import style from "../styles/pages/why-cosignage.css";
 import Head from "next/head";
 
 const WhyCosignage = () => (
     <>
-        <style jsx>{style}</style>
+        <style jsx>{`
+            main {
+                padding: 50px 100px;
+            }
+
+            h1 {
+                margin-bottom: 20px;
+            }
+
+            h2 {
+                margin-top: 20px;
+                margin-bottom: 20px;
+            }
+
+            p {
+                margin-bottom: 10px;
+            }
+
+            @media only screen and (max-width: 600px) {
+                main {
+                    padding: 50px 25px;
+                }
+            }
+        `}</style>
         <Head>
             <title>Why Cosignage</title>
             <meta name="description" content="Why Cosignage? Cosignage is a set of Coronavirus-communication signage meant to ease your business’ communication during the coronavirus pandemic." />

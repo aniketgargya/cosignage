@@ -1,7 +1,6 @@
 import axios from "axios";
 import { CustomButton, Message, NumberField } from "../../components";
 import { has } from "lodash";
-import style from "../../styles/pages/order/[_id].css";
 import { useEffect, useState } from "react";
 import { useCart } from "../../contexts";
 import { axiosError } from "../../functions";
@@ -31,7 +30,119 @@ const OrderId = ({ _id, data, error }) => {
 
     return (
         <>
-            <style jsx>{style}</style>
+            <style jsx>{`
+                main {
+                    min-height: 30vw;
+                    position: relative;
+                    padding: 50px 100px;
+                }
+
+                .sign {
+                    display: flex;
+                    justify-content: space-between;
+                }
+
+                .sign .rest {
+                    margin-right: 100px;
+                }
+
+                .sign .display {
+                    display: flex;
+                }
+
+                .sign .display .main-img {
+                    width: 450px;
+                }
+
+                .sign h1 {
+                    margin-bottom: 20px;
+                }
+
+                .sign .select-input {
+                    display: flex;
+                    justify-content: space-between;
+                    flex-wrap: wrap;
+                    align-items: center;
+                }
+
+                select {
+                    font-family: inherit;
+                    font-size: 18px;
+                    padding: 6px 20px 6px 8px;
+                    width: 50%;
+                    min-width: 250px;
+                    margin: 20px 50px 20px 0;
+                }
+
+                .sign .select-input-bottom {
+                    margin-top: 10px;
+                }
+
+                .sign .select-input-bottom  {
+                    display: flex;
+                    align-items: center;
+                }
+
+                :global(.sign .select-input-bottom button) {
+                    margin-right: auto;
+                }
+
+                @media only screen and (max-width: 1200px) {
+                    .sign .display .main-img {
+                        width: 300px;
+                    }    
+                }
+
+                @media only screen and (max-width: 1000px) {
+                    main {
+                        padding: 50px;
+                    }
+
+                    .sign {
+                        flex-direction: column-reverse;
+                    }
+
+                    .sign .display {
+                        margin-bottom: 30px;
+                        justify-content: center;
+                    }
+
+                    .sign .rest {
+                        margin-right: 0;
+                    }
+
+                    select {
+                        font-size: 14px;
+                    }
+                }
+
+                @media only screen and (max-width: 500px) {
+                    .sign .select-input {
+                        display: flex;
+                        justify-content: space-between;
+                        flex-wrap: wrap;
+                        align-items: center;
+                    }
+
+                    .sign .display .main-img {
+                        width: 85%;
+                    }
+
+                    .sign .select-input {
+                        margin-top: 20px;
+                        flex-direction: column;
+                        align-items: flex-start;
+                        margin-bottom: 20px;
+                    }
+
+                    select {
+                        min-width: auto;
+                        width: 100%;
+                        margin: 0;
+                        margin-bottom: 20px;
+                    }
+                }
+            `}</style>
 
             <main>
                 <>

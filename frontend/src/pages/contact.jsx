@@ -1,4 +1,3 @@
-import style from "../styles/pages/contact.css";
 import { Formik, Field, Form } from "formik";
 import axios from "axios";
 import { TextField, CustomButton, Message } from "../components";
@@ -10,7 +9,85 @@ const Contact = () => {
     const { userId } = useUser();
     return (
         <>
-            <style jsx>{style}</style>
+            <style jsx>{`
+                main {
+                    max-width: 1400px;
+                    width: 80%;
+                    margin: 0 auto;
+                    padding: 100px 0;
+                }
+
+                .contact {
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: flex-start;
+                }
+
+                h1 {
+                    margin-bottom: 10px;
+                }
+
+                .subheader {
+                    margin-bottom: 10px;
+                    font-size: 18px;
+                }
+
+                :global(.contact-form) {
+                    width: 60%;
+                    margin-right: 10%;
+                }
+
+                :global(.contact-form > .text-field:not(:last-child)) {
+                    margin-bottom: 20px;
+                }
+
+                :global(.contact-info) {
+                    width: 30%;
+                    text-align: right;
+                }
+
+                :global(.contact-info > h3) {
+                    margin-bottom: 10px;
+                }
+
+                :global(.contact-info > p) {
+                    margin-bottom: 5px;
+                }
+
+                :global(.contact-info > p > a) {
+                    color: inherit;
+                    font-size: inherit;
+                }
+
+                :global(.contact-info > h3:not(:first-child)) {
+                    margin-top: 10px;
+                }
+
+                @media only screen and (max-width: 800px) {
+                    main {
+                        padding: 50px 0;
+                    }
+
+                    .contact {
+                        flex-direction: column;
+                    }
+
+                    :global(.contact-form) {
+                        width: 100%;
+                        margin-right: 0;
+                        margin-bottom: 30px;
+                    }
+
+                    :global(.contact-info) {
+                        width: 100%;
+                        text-align: center;
+                    }
+
+                    :global(.contact-info > h3) {
+                        margin-bottom: 10px;
+                    }
+                }
+            `}</style>
             <Head>
                 <title>Contact Cosignage</title>
                 <meta name="description" content="Contact Cosignage to ease your business’ communication during the coronavirus pandemic." />

@@ -1,5 +1,4 @@
 import { useEffect } from "react";
-import style from "../styles/pages/success.css";
 import Head from "next/head";
 
 const Success = () => {
@@ -9,7 +8,18 @@ const Success = () => {
 
     return (
         <>
-            <style jsx>{style}</style>
+            <style jsx>{`
+                main {
+                    padding: 50px 100px;
+                    min-height: 50vh;
+                }
+
+                @media only screen and (max-width: 1000px) {
+                    main {
+                        padding: 50px 50px;
+                    }
+                }
+            `}</style>
             <Head>
                 <title>Success | cosignage.info</title>
             </Head>

@@ -1,4 +1,3 @@
-import style from "../styles/pages/checkout.css";
 import axios from "axios";
 import { useCart, useUser } from "../contexts";
 import { loadStripe } from "@stripe/stripe-js";
@@ -15,7 +14,47 @@ const Checkout = () => {
 
     return (
         <>
-            <style jsx>{style}</style>
+            <style jsx>{`
+                main {
+                    max-width: 1400px;
+                    width: 80%;
+                    margin: 0 auto;
+                    padding: 100px 0;
+                }
+
+                h1 {
+                    margin-bottom: 10px;
+                }
+
+                :global(.checkout-form) {
+                    width: 100%;
+                    max-width: 800px;
+                }
+
+                :global(.checkout-form > .text-field:not(:last-child)) {
+                    margin-bottom: 20px;
+                }
+
+                @media only screen and (max-width: 800px) {
+                    main {
+                        padding: 50px 0;
+                    }
+
+                    .contact {
+                        flex-direction: column;
+                    }
+
+                    :global(.checkout-form) {
+                        width: 100%;
+                        margin-right: 0;
+                        margin-bottom: 30px;
+                    }
+
+                    :global(.contact-info > h3) {
+                        margin-bottom: 10px;
+                    }
+                }
+            `}</style>
             <Head>
                 <title>Checkout | cosignage.info</title>
                 <meta name="description" content="Contact Cosignage to ease your business’ communication during the coronavirus pandemic." />
