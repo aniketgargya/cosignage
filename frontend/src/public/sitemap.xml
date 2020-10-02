@@ -9,17 +9,27 @@
 
 <url>
   <loc>https://cosignage.info/</loc>
-  <lastmod>2020-09-12T04:28:21+00:00</lastmod>
+  <lastmod>2020-10-02T15:46:44+00:00</lastmod>
   <priority>1.00</priority>
 </url>
 <url>
   <loc>https://cosignage.info/why-cosignage</loc>
-  <lastmod>2020-09-12T04:28:21+00:00</lastmod>
+  <lastmod>2020-10-02T15:46:44+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://cosignage.info/order</loc>
+  <lastmod>2020-10-02T15:46:44+00:00</lastmod>
   <priority>0.80</priority>
 </url>
 <url>
   <loc>https://cosignage.info/contact</loc>
-  <lastmod>2020-09-12T04:28:21+00:00</lastmod>
+  <lastmod>2020-10-02T15:46:44+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://cosignage.info/my-cart</loc>
+  <lastmod>2020-10-02T15:46:44+00:00</lastmod>
   <priority>0.80</priority>
 </url>
 
