@@ -1,8 +1,20 @@
-import { Card, CustomButton } from "../components";
+import { Card, CustomButton, TextField, Message } from "../components";
 import Head from "next/head";
 import Link from "next/link";
+import dynamic from "next/dynamic";
+import { useUser } from "../contexts";
+import { axiosError } from "../functions";
+import axios from "axios";
+import { Formik, Form, Field } from "formik";
+
+const BusinessMap = dynamic(
+    () => import("../components/business-map"),
+    { ssr: false }
+);
 
 const Index = () => {
+    const { userId } = useUser();
+
     return (
         <>
             <style jsx>{`
@@ -91,6 +103,41 @@ const Index = () => {
                     text-align: center;
                 }
 
+                .business-map {
+                    padding: 100px 0;
+                    background-color: var(--color-gray-light-1)
+                }
+
+                .business-map h1 {
+                    margin: 0 48px;
+                    margin-bottom: 40px;
+                    text-align: center;
+                }
+
+                .business-map :global(.leaflet-container) {
+                    width: 100%;
+                    height: 30vw;
+                    min-height: 400px;
+                }
+
+                .emailing-list {
+                    padding: 100px 48px;
+                    background-color: var(--color-gray-light-1);
+                }
+
+                :global(.emailing-list-form) {
+                    width: 75%;
+                    margin: 0 auto;
+                }
+
+                :global(.emailing-list .emailing-list-form h1) {
+                    margin-bottom: 20px;
+                }
+
+                :global(.emailing-list-form > .text-field:not(:last-child)) {
+                    margin-bottom: 20px;
+                }
+
                 @media only screen and (max-width: 900px) {
                     header {
                         flex-direction: column;
@@ -129,6 +176,11 @@ const Index = () => {
                     .signs .sign img {
                         width: 150px;
                     }
+
+                    :global(.emailing-list-form) {
+                        width: 100%;
+                        margin: 0 auto;
+                    }
                 }
 
                 @media only screen and (max-width: 600px) {
@@ -138,6 +190,14 @@ const Index = () => {
 
                     .signs {
                         grid-template-columns: repeat(1, 1fr);
+                    }
+
+                    .business-map {
+                        padding: 48px 0;
+                    }
+
+                    .emailing-list {
+                        padding: 48px;
                     }
                 }
 
@@ -229,8 +289,51 @@ const Index = () => {
                 </div>
 
                 <div className="cta-container">
-                    <Link href="/order"><CustomButton value="Order Now" /></Link>
+                    <Link href="/order"><a><CustomButton value="Order Now" /></a></Link>
                 </div>
+            </section>
+
+            {/* <section className="business-map">
+                <h1>Over 30 Businesses Use Cosignage</h1>
+                <BusinessMap />
+            </section> */}
+
+            <section className="emailing-list">
+                <Formik
+                    initialValues={{
+                        email: ""
+                    }}
+                    onSubmit={async (values, { setSubmitting, setStatus }) => {
+                        setSubmitting(true);
+
+                        try {
+                            await axios({
+                                method: "POST",
+                                url: "/api/o/email",
+                                data: {
+                                    ...values,
+                                    userId
+                                }
+                            });
+
+                            setStatus({ success: true, message: "You've been added to the emailing list!" });
+                        } catch (e) {
+                            setStatus({
+                                success: false,
+                                message: axiosError(e)
+                            });
+                        }
+                    }}
+                >
+                    {({ isSubmitting, status }) => (
+                        <Form className="emailing-list-form">
+                            <h1>Subscribe to Our Emailing List</h1>
+                            <Field type="text" name="email" label="Email" placeholder="Email" id="email" as={TextField} />
+                            <Field type="submit" value="Submit" disabled={isSubmitting} as={CustomButton} />
+                            {status && <Message {...status} />}
+                        </Form>
+                    )}
+                </Formik>
             </section>
         </>
     );

@@ -23,5 +23,28 @@ router.post("/message",
     })
 );
 
+router.post("/email",
+    [
+        body("email").isEmail().withMessage({ status: 400, message: "Email must be a valid email" })
+    ],
+    validate,
+    asyncHandler(async (req, res) => {
+        const { userId, email } = req.body;
+
+        await db.emails.updateOne(
+            { email },
+            {
+                $set: {
+                    userId,
+                    subscribed: true
+                }
+            },
+            { upsert: true }
+        );
+
+        res.sendStatus(200);
+    })
+);
+
 module.exports = { router };
 

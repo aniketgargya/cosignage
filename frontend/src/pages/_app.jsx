@@ -1,6 +1,7 @@
 import { UserProvider, CartProvider } from "../contexts";
 import { NavBar, CustomFooter } from "../components";
 import Head from "next/head";
+import "leaflet/dist/leaflet.css";
 
 const App = ({ Component, pageProps }) => {
 
