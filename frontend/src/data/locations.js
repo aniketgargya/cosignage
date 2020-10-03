@@ -1,4 +1,0 @@
-const locations = [
-];
-
-export { locations };
