@@ -1,0 +1,4 @@
+const locations = [
+];
+
+export { locations };

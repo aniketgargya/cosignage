@@ -6,6 +6,7 @@ import { useUser } from "../contexts";
 import { axiosError } from "../functions";
 import axios from "axios";
 import { Formik, Form, Field } from "formik";
+import { locations } from "../data/locations";
 
 const BusinessMap = dynamic(
     () => import("../components/business-map"),
@@ -122,7 +123,7 @@ const Index = () => {
 
                 .emailing-list {
                     padding: 100px 48px;
-                    background-color: var(--color-gray-light-1);
+                    background-color: white;
                 }
 
                 :global(.emailing-list-form) {
@@ -293,10 +294,10 @@ const Index = () => {
                 </div>
             </section>
 
-            {/* <section className="business-map">
+            <section className="business-map">
                 <h1>Over 30 Businesses Use Cosignage</h1>
-                <BusinessMap />
-            </section> */}
+                <BusinessMap locations={locations} />
+            </section>
 
             <section className="emailing-list">
                 <Formik
