@@ -4,6 +4,7 @@ const { ObjectID: { isValid: isValidObjectID }, ObjectID } = require("mongodb");
 const db = require("../db");
 
 const UserId = String.withConstraint(s => validate(s) && version(s) === 1);
+const SessionId = String.withConstraint(s => validate(s) && version(s) === 1);
 
 const WholeNumber = Number.withConstraint(n => n > 0);
 
@@ -48,4 +49,4 @@ const Cart = {
     }
 };
 
-module.exports = { UserId, Cart, String, MongoObjectID };
+module.exports = { UserId, Cart, String, SessionId, MongoObjectID };
