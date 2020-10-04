@@ -17,7 +17,14 @@ router.post("/message",
     asyncHandler(async (req, res) => {
         const { userId, name, businessName, email, message } = req.body;
 
-        await db.messages.insertOne({ userId, name, businessName, email, message });
+        await db.messages.insertOne({
+            userId,
+            name,
+            businessName,
+            email,
+            message,
+            time: Date.now()
+        });
 
         res.sendStatus(200);
     })
@@ -36,7 +43,8 @@ router.post("/email",
             {
                 $set: {
                     userId,
-                    subscribed: true
+                    subscribed: true,
+                    time: Date.now()
                 }
             },
             { upsert: true }

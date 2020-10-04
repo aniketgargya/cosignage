@@ -23,7 +23,7 @@ router.post("/visit",
             sessionId,
             pathname,
             ipInfo,
-            time: Date(Date.now())
+            time: Date.now()
         });
 
         res.sendStatus(200);
@@ -47,7 +47,7 @@ router.post("/cart",
             $set: {
                 cart,
                 ipInfo,
-                time: Date(Date.now())
+                time: Date.now()
             }
         }, { upsert: true });
 
