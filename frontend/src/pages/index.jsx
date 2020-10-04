@@ -6,7 +6,7 @@ import { useUser } from "../contexts";
 import { axiosError } from "../functions";
 import axios from "axios";
 import { Formik, Form, Field } from "formik";
-import { locations, zoom, center } from "../data/locations";
+import { locations, zoom, center, mapHeader } from "../data/locations";
 
 const BusinessMap = dynamic(
     () => import("../components/business-map"),
@@ -295,7 +295,7 @@ const Index = () => {
             </section>
 
             <section className="business-map">
-                <h1>Over 30 Businesses Use Cosignage</h1>
+                <h1>{mapHeader}</h1>
                 <BusinessMap locations={locations} center={center} zoom={zoom} />
             </section>
 
