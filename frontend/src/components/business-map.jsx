@@ -7,8 +7,8 @@ const markerIcon = icon({
     iconAnchor: [22, 44]
 });
 
-const BusinessMap = ({ locations }) => (
-    <Map center={[40.1106, -88.2073]} zoom={13}>
+const BusinessMap = ({ locations, center, zoom }) => (
+    <Map center={center} zoom={zoom}>
         <TileLayer
             attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
             url='https://{s}.tile.osm.org/{z}/{x}/{y}.png'
